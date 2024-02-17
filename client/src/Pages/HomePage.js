@@ -21,11 +21,17 @@ function HomePage() {
         navigate('/page1');
     };
 
+    // Handler to navigate to Page1
+    const goToLogin = () => {
+        navigate('/login');
+    };
+
     return (
         <div>
             <h1>Home Page</h1>
             <p>{message}</p>
             <button onClick={goToPage1}>Go to Page 1</button>
+            <button onClick={goToLogin}>Go to Login</button>
         </div>
     );
 }
