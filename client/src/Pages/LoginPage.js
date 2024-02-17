@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../output.css'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -40,6 +41,10 @@ const LoginPage = () => {
           />
           <br />
           <button onClick={handleLogin}>Login</button>
+          <p>Don't have an account? Create on here!</p>
+          <h1 className="text-3xl font-bold underline">
+            Hello world!
+        </h1>
         </div>
       )}
     </div>
