@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../output.css'
 
 const LoginPage = () => {
+    const navigate = useNavigate(); 
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,6 +15,11 @@ const LoginPage = () => {
     } else {
       alert('Please enter username and password');
     }
+  };
+
+  const goToSignup = () => {
+    console.log('is this working?')
+    navigate('/signup');
   };
 
   return (
@@ -52,7 +60,7 @@ const LoginPage = () => {
           >
             Login
           </button><br/>
-          <p>Don't have an account? Create on <span>here</span>!</p>
+          <p>Don't have an account? Create on <span className="text-blue-500 cursor-pointer" onClick={goToSignup}>here</span>!</p>
           </div>
           </div><br/>
           
