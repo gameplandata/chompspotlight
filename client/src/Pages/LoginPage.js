@@ -7,8 +7,6 @@ const LoginPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // Here you can implement your authentication logic
-    // For simplicity, let's just check if username and password are not empty
     if (username !== '' && password !== '') {
       setIsLoggedIn(true);
     } else {
@@ -25,26 +23,40 @@ const LoginPage = () => {
         </div>
       ) : (
         <div>
-          <h1>Login</h1>
+            <h1 className="text-6xl text-center pt-[15vh]">Login</h1>
+        <div className="flex justify-center items-center pt-[15vh]">
+          
+          <div className="w-1/5">
+          <span>Username:</span>
           <input
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <br />
+          <span>Password:</span>
           <input
-            type="password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button onClick={handleLogin}>Login</button>
-          <p>Don't have an account? Create on here!</p>
-          <h1 className="text-3xl font-bold underline">
-            Hello world!
-        </h1>
+          <div className="flex flex-col justify-center items-center">
+          <button 
+            class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
+            onClick={handleLogin}
+          >
+            Login
+          </button><br/>
+          <p>Don't have an account? Create on <span>here</span>!</p>
+          </div>
+          </div><br/>
+          
+        </div>
         </div>
       )}
     </div>

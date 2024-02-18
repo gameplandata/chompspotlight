@@ -30,7 +30,7 @@ function HomePage() {
         <div>
             <h1>Home Page</h1>
             <p>{message}</p>
-            <button onClick={goToPage1}>Go to Page 1</button>
+            <button onClick={goToPage1}>Go to Page 1</button><br/>
             <button onClick={goToLogin}>Go to Login</button>
         </div>
     );
