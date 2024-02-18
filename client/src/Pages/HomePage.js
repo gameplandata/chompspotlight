@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Components/Footer';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -32,6 +33,7 @@ function HomePage() {
             <p>{message}</p>
             <button onClick={goToPage1}>Go to Page 1</button><br/>
             <button onClick={goToLogin}>Go to Login</button>
+            <Footer/>
         </div>
     );
 }
