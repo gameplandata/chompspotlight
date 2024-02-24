@@ -102,7 +102,7 @@ const EditProfilePage = ({ userInfo }) => {
 
           {/* X */}
           <div className="mb-5">
-            <label htmlFor="x" className="mb-3 block text-base font-medium">Field X</label>
+            <label htmlFor="x" className="mb-3 block text-base font-medium">X</label>
             <input type="text" id="x" name="x" value={tempFormDetails.x} onChange={handleChange} placeholder="X" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
