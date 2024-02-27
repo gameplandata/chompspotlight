@@ -21,6 +21,7 @@ function App() {
           <Route path="/profile" element={<UserProfilePage user={userInfo}/>} />
           <Route path="/profile/edit" element={<EditProfilePage user={userInfo}/>} />
           <Route path="/search" element={<Search/>}/>
+          <Route path="/search/:searchText" exact element={<Search/>}/>
         </Routes>
       </div>
     </Router>

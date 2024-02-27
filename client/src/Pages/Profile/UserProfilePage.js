@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import Header from "../../Components/HeaderWithoutSearch"
 
 const userInfo = {
   userName: 'username',
@@ -37,6 +38,8 @@ const UserProfilePage = ({ user }) => {
 
   return (
     <div className="bg-white min-h-screen">
+      <header className="fixed w-full z-10"><Header/></header>
+      <div className="h-20"></div>
       <div className="container mx-auto p-4">
         <div className="flex justify-end pr-80">
           <div className="nav-toggle cursor-pointer text-xl px-2 py-1 border rounded-lg bg-white text-gray-700 shadow-sm hover:bg-gray-300" onClick={toggleSidebar}>☰</div>

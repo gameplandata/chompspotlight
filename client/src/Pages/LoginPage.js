@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import Header from "../Components/HeaderWithoutSearch"
 import '../output.css'
 
 const LoginPage = () => {
@@ -25,6 +26,7 @@ const LoginPage = () => {
 
   return (
     <div>
+      <header className="fixed w-full z-10"><Header/></header>
       {isLoggedIn ? (
         <div>
           <h1>Welcome, {username}!</h1>

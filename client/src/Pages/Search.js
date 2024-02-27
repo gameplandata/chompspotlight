@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Footer from '../Components/Footer'
+import Header from '../Components/HeaderWithSearch'
 
 const collegeSports = ["Football", "Basketball", "Baseball", "Softball", "Soccer", "Volleyball", "Track and Field", "Swimming", "Tennis", "Golf", "Wrestling", "Hockey", "Lacrosse"];
 // Generate sample user data
@@ -18,10 +20,13 @@ const generateUsers = () => {
   return users;
 }
 
-export default function App() {
+export default function Search() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [users, setUsers] = useState(generateUsers());
   const [showPopup, setShowPopup] = useState(false);
+  const { searchText } = useParams();
+
+  console.log(searchText);
 
   // Function to handle filter selection
   const handleFilterSelection = (filter) => {
@@ -43,6 +48,8 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <header className="fixed w-full z-10"><Header/></header>
+      <div className="h-20"></div>
       <div className="flex-grow overflow-y-auto" style={{ paddingBottom: "100px" }}>
         <div className="p-4 ml-48">
           <div className="flex gap-4">
