@@ -7,6 +7,7 @@ import SignupPage from './Pages/SignupPage'
 import UserProfilePage, {userInfo} from './Pages/Profile/UserProfilePage'
 import EditProfilePage from './Pages/Profile/EditProfilePage';
 import Search from './Pages/Search'
+import Feed from './Pages/Feed'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" element={<UserProfilePage user={userInfo}/>} />
           <Route path="/profile/edit" element={<EditProfilePage user={userInfo}/>} />
           <Route path="/search" element={<Search/>}/>
+          <Route path="/feed" element={<Feed/>}/>
         </Routes>
       </div>
     </Router>
