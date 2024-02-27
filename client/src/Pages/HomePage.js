@@ -24,8 +24,25 @@ const HomePage = () => {
   const onSecondayContainerClick = useCallback(() => {
     // Please sync "Feed" to the project
   }, []);
+  const onLoginTextClick = useCallback(() => {
+    // Please sync "Login" to the project
+  }, []);
 
 
+  const onLoginText2Click = useCallback(() => {
+    // Please sync "Login" to the project
+
+  }, []);
+
+  const onSecondayContainerClick = useCallback(() => {
+    // Please sync "Feed" to the project
+  }, []);
+
+
+  // Handler to navigate to Page1
+  const goToLogin = () => {
+    navigate("/login");
+  };
   // Handler to navigate to Page1
   const goToLogin = () => {
     navigate("/login");
