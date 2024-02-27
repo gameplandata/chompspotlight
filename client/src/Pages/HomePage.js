@@ -11,45 +11,17 @@ const HomePage = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const onLoginTextClick = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
-
-
-  const onLoginText2Click = useCallback(() => {
-    // Please sync "Login" to the project
-
-  }, []);
-
-  const onSecondayContainerClick = useCallback(() => {
-    // Please sync "Feed" to the project
-  }, []);
-  const onLoginTextClick = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
-
-
-  const onLoginText2Click = useCallback(() => {
-    // Please sync "Login" to the project
-
-  }, []);
-
   const onSecondayContainerClick = useCallback(() => {
     // Please sync "Feed" to the project
   }, []);
 
-
-  // Handler to navigate to Page1
-  const goToLogin = () => {
-    navigate("/login");
-  };
   // Handler to navigate to Page1
   const goToLogin = () => {
     navigate("/login");
   };
 
   return (
-    <div className="relative bg-white w-full flex flex-col items-center justify-start pt-18 box-border text-center text-4xl text-black font-serif">
+    <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif">
       <Header />
       <div className="self-stretch overflow-hidden flex flex-row items-center justify-center p-[8vh] relative gap-] text-[0.89rem]">
         <div className="flex-1">
