@@ -25,7 +25,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="relative pb-[10vh] min-h-screen">
       <Header/>
       {isLoggedIn ? (
         <div>

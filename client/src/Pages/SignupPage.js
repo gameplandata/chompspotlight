@@ -15,7 +15,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
+    <div className="relative pb-[10vh] min-h-screen">
       <Header/>
       <h1 className="text-6xl text-center pt-[15vh]">Sign Up</h1>
       <div className="flex justify-center items-center pt-[7vh]">

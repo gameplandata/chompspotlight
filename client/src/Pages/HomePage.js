@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../Components/Footer";
-import { useCallback } from "react";
+import axios from "axios";
 import Header from "../Components/HeaderWithSearch";
+import Footer from "../Components/Footer";
 
 
 const HomePage = () => {
@@ -21,7 +20,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif">
+    <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif pb-[10vh] min-h-screen">
       <header className="fixed top-0 w-full z-10"><Header /></header>
       <div className="self-stretch overflow-hidden flex flex-row items-center justify-center p-[8vh] relative gap-] text-[0.89rem]">
         <div className="flex-1">
@@ -396,7 +395,7 @@ const HomePage = () => {
           get to know them better before entering into an agreement.
         </div>
       </div>
-
+      <Footer/>
     </div>
   );
 };

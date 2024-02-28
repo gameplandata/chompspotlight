@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Header from "../../Components/HeaderWithoutSearch"
+import Footer from "../../Components/Footer"
 
 const userInfo = {
   userName: 'username',
@@ -37,7 +38,7 @@ const UserProfilePage = ({ user }) => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="relative bg-white pb-[10vh] min-h-screen">
       <Header/>
       <div className="h-20"></div>
       <div className="container mx-auto p-4">
@@ -105,6 +106,7 @@ const UserProfilePage = ({ user }) => {
         </div>
 
       </div>
+      <Footer/>
     </div>
   );
   
