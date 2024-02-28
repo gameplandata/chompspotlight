@@ -109,7 +109,7 @@ const EditProfilePage = ({ userInfo }) => {
           {/* Edit and Save/Cancel Buttons */}
           {!editMode ? (
             <div className="flex items-center justify-center mt-4">
-              <button type="button" onClick={handleEdit} class="hover:shadow-form w-64 rounded-md bg-gray-100 py-2 px-8 text-center text-base font-semibold text-black border border-gray-400 hover:bg-gray-200">Edit Profile</button>
+              <button type="button" onClick={handleEdit} className="hover:shadow-form w-64 rounded-md bg-gray-100 py-2 px-8 text-center text-base font-semibold text-black border border-gray-400 hover:bg-gray-200">Edit Profile</button>
             </div>
           ) : (
             <div className="flex justify-between gap-4">

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { useCallback } from "react";
-import Header from "../Components/Header";
+import Header from "../Components/HeaderWithSearch";
 
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
 
   return (
     <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif">
-      <Header />
+      <header className="fixed top-0 w-full z-10"><Header /></header>
       <div className="self-stretch overflow-hidden flex flex-row items-center justify-center p-[8vh] relative gap-] text-[0.89rem]">
         <div className="flex-1">
           <img src='vb.png' alt="logo" className="rounded-full shadow-lg" />
@@ -38,7 +38,7 @@ const HomePage = () => {
             </div>
             <div className="overflow-hidden flex flex-row items-start justify-start gap-[0.67rem]">
               <button
-                class="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
+                className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
                 onClick={onSecondayContainerClick}
               >
                 <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem]">
@@ -46,7 +46,7 @@ const HomePage = () => {
                 </div>
               </button>
               <button
-                class="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
+                className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
                 onClick={onSecondayContainerClick}
               >
                 <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem] ">
