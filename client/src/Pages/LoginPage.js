@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import Header from "../Components/HeaderWithoutSearch"
 import '../output.css'
 
 const LoginPage = () => {
@@ -25,6 +26,7 @@ const LoginPage = () => {
 
   return (
     <div>
+      <header className="fixed w-full z-10"><Header/></header>
       {isLoggedIn ? (
         <div>
           <h1>Welcome, {username}!</h1>
@@ -56,7 +58,7 @@ const LoginPage = () => {
               <br />
               <div className="flex flex-col justify-center items-center">
                 <button
-                  class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
+                  className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
                   onClick={handleLogin}
                 >
                   Login
