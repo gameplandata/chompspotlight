@@ -15,8 +15,8 @@ const HomePage = () => {
   }, []);
 
   // Handler to navigate to Page1
-  const goToLogin = () => {
-    navigate("/login");
+  const goToFeed = () => {
+    navigate("/feed");
   };
 
   return (
@@ -38,7 +38,7 @@ const HomePage = () => {
             <div className="overflow-hidden flex flex-row items-start justify-start gap-[0.67rem]">
               <button
                 className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
-                onClick={onSecondayContainerClick}
+                onClick={goToFeed}
               >
                 <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem]">
                   View Feed
