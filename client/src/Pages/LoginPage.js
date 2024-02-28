@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <header className="fixed w-full z-10"><Header/></header>
+      <Header/>
       {isLoggedIn ? (
         <div>
           <h1>Welcome, {username}!</h1>

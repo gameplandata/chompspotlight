@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Footer from '../Components/Footer';
+import Header from "../Components/HeaderWithoutSearch"
 
 const SignupPage = () => {
   const [firstname, setFirstname] = useState('');
@@ -15,6 +16,7 @@ const SignupPage = () => {
 
   return (
     <div>
+      <Header/>
       <h1 className="text-6xl text-center pt-[15vh]">Sign Up</h1>
       <div className="flex justify-center items-center pt-[7vh]">
 

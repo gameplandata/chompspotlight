@@ -38,7 +38,7 @@ const UserProfilePage = ({ user }) => {
 
   return (
     <div className="bg-white min-h-screen">
-      <header className="fixed w-full z-10"><Header/></header>
+      <Header/>
       <div className="h-20"></div>
       <div className="container mx-auto p-4">
         <div className="flex justify-end pr-80">

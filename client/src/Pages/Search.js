@@ -48,7 +48,7 @@ export default function Search() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="fixed w-full z-10"><Header/></header>
+      <Header/>
       <div className="h-20"></div>
       <div className="flex-grow overflow-y-auto" style={{ paddingBottom: "100px" }}>
         <div className="p-4 ml-48">
