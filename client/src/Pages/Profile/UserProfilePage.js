@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Header from "../../Components/HeaderWithoutSearch"
 import Footer from "../../Components/Footer"
+import PostModal from './PostModal';
 
 const userInfo = {
   userName: 'username',
@@ -28,6 +29,7 @@ const userInfo = {
 const UserProfilePage = ({ user }) => {
   const navigate = useNavigate(); 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activePost, setActivePost] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,6 +37,14 @@ const UserProfilePage = ({ user }) => {
 
   const goToEditProfile = () => {
     navigate('/profile/edit'); 
+  };
+
+  const handlePostClick = (post) => {
+    setActivePost(post);
+  };
+
+  const closePostModal = () => {
+    setActivePost(null);
   };
 
   return (
@@ -98,13 +108,13 @@ const UserProfilePage = ({ user }) => {
         <div className="mt-8 flex justify-center">
           <div className="grid grid-cols-3 gap-2 md:gap-1 mx-auto"> 
             {user.posts.map((post, index) => (
-              <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto"> 
-                <img src={post.url} alt={`Post ${index + 1}`} className="object-cover w-full h-full"/>
+              <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto" onClick={() => handlePostClick(post)}> 
+                <img src={post.url} alt={`Post ${index + 1}`} className="object-cover w-full h-full cursor-pointer"/>
               </div>
             ))}
           </div>
         </div>
-
+        {activePost && <PostModal post={activePost} onClose={closePostModal} />}
       </div>
       <Footer/>
     </div>
