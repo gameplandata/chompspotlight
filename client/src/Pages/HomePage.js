@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../Components/Footer";
-import { useCallback } from "react";
+import axios from "axios";
 import Header from "../Components/HeaderWithSearch";
+import Footer from "../Components/Footer";
 
 
 const HomePage = () => {
@@ -16,12 +15,12 @@ const HomePage = () => {
   }, []);
 
   // Handler to navigate to Page1
-  const goToLogin = () => {
-    navigate("/login");
+  const goToFeed = () => {
+    navigate("/feed");
   };
 
   return (
-    <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif">
+    <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif pb-[10vh] min-h-screen">
       <header className="fixed top-0 w-full z-10"><Header /></header>
       <div className="self-stretch overflow-hidden flex flex-row items-center justify-center p-[8vh] relative gap-] text-[0.89rem]">
         <div className="flex-1">
@@ -39,7 +38,7 @@ const HomePage = () => {
             <div className="overflow-hidden flex flex-row items-start justify-start gap-[0.67rem]">
               <button
                 className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
-                onClick={onSecondayContainerClick}
+                onClick={goToFeed}
               >
                 <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem]">
                   View Feed
@@ -396,7 +395,7 @@ const HomePage = () => {
           get to know them better before entering into an agreement.
         </div>
       </div>
-
+      <Footer/>
     </div>
   );
 };

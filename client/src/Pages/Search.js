@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Footer from '../Components/Footer'
 import Header from '../Components/HeaderWithSearch'
+import Footer from '../Components/Footer'
 
 const collegeSports = ["Football", "Basketball", "Baseball", "Softball", "Soccer", "Volleyball", "Track and Field", "Swimming", "Tennis", "Golf", "Wrestling", "Hockey", "Lacrosse"];
 // Generate sample user data
@@ -47,7 +47,7 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
       <header className="fixed w-full z-10"><Header/></header>
       <div className="h-20"></div>
       <div className="flex-grow overflow-y-auto" style={{ paddingBottom: "100px" }}>
@@ -103,7 +103,7 @@ export default function Search() {
           </div>
         </div>
       )}
-      <footer className="fixed bottom-0 w-full"><Footer/></footer>
+      <Footer/>
     </div>
   );
 }
