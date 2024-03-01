@@ -1,13 +1,13 @@
 # Steps to get MySQL working on your local environment.
-1. Accept the email invite to the Google Cloud Platform
-2. Click on console on the top right
-3. Select the 'Chommp Spotlight' project on the top left drop down
-4. Then click on the navigation menu on the left by clicking the three bar symbol
-5. Click on SQL
-6. Click on chomp-spotlight
-7. This opens the dashboard to configure the database
-8. Click on connections on the left side
-9. Click on the networking tab
+1. Accept the email invite to the Google Cloud Platform.
+2. Click on console on the top right.
+3. Select the 'Chomp Spotlight' project on the top left drop down.
+4. Then click on the navigation menu on the left by clicking the three bar symbol.
+5. Click on SQL.
+6. Click on chomp-spotlight.
+7. This opens the dashboard to configure the database.
+8. Click on connections on the left side.
+9. Click on the networking tab.
 10. Under authorized networks add your IP address, this whitelists your IP address so you can connect to the database.
 11. Save and exit.
 12. Download a SQL GUI program, something that will allow you to connect to a SQL database and view its tables. For this example I use MySQL Workbench which can be downloaded here: https://www.mysql.com/fr/products/workbench/
