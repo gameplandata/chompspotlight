@@ -18,7 +18,7 @@ Ask Kevin for credentials for an existing user or make your own user by going to
 16. Next we will be setting up this project to connect to the database. We will be using an environment variables file that will store the hostname and user credentials in a file that will only stay on our local machines and not be pushed to Github, this is so we don't
 expose our user credentials to connect to the database to the public.
 17. To utilize this environment variables file we will be using a npm package called 'dotenv', I have already added this to the package.json file in this branch so you may just run `npm install` and it should install, if not you can install it by running `npm install dotenv`
-18. Next, create a file in the backend folder named `.env` in this file you should write the following lines:
+18. Next, create a file in the backend folder named `.env`. I have already added this path to .gitignore in this branch. In this file you should write the following lines:
 ```
 DB_HOST=<host IP>
 DB_USER=<username>
@@ -27,7 +27,7 @@ DB_DATABASE=<database name>
 ```
 19. Replace the <> with the same things you used earlier in step 13. If you don't want to create a new account and want to use an existing account, ask Kevin for credentials. DB_DATABASE is the name of the database, I created one called 'devs' that this example runs off of, 
 we will probably create and use another database name for our actual project. So for right now, to run this example, just set `DB_DATABASE=devs`.
-20. Look at the server.js file to see how the .env file and dotenv package is used.
+20. Look at the database.js file to see how the .env file and dotenv package is used.
 21. That should be it, everything should be ready to go. Run the client and server and navigate to localhost:3000/page1. Click 'Get Developers' to fetch all the developer names and email addresses. This is an example of a get request.
 22. Add a developer to the database by filling out the two fields and clicking 'Add Developer', this is a post method that calls the backend which then the backend sends a command to the SQL database to insert into the database. Click 'Get Developers' to make sure they were added.
 23. I highly recommend looking at the page1.js files in both the client and server and understand how they work and the flow of data, we will basically be using the same structure for this project.
