@@ -1,59 +1,48 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faComment, faAddressBook, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faUserPlus, faPhone } from '@fortawesome/free-solid-svg-icons';
 
-const Post = () => {
-    return (
-        <div className="mx-auto w-[28rem] pb-4">
-            <div className="flex-col justify-center items-center border-2 border-gray rounded-xl p-1">
-                <div className="self-stretch flex flex-row justify-start items-center pt-2">
-                    <img src="tori.jpg" alt="Profile Picture" class="w-24 h-24 object-cover rounded-full flex-shrink-0"></img>
-                    <div className="text-left text-2xl pl-4"> Username </div>
-                    <div className="flex justify-between items-center w-full px-12">
-                        <div className="text-center">
-                            <a href={`https://www.instagram.com/`} target="_blank" rel="noopener noreferrer">
-                                <img src="/images/profile/instagram.jpg" alt="Instagram" className="mx-auto w-6 h-6 cursor-pointer" />
-                            </a>
-                        </div>
-                        <div className="text-center">
-                            <a href={`https://www.tiktok.com/`} target="_blank" rel="noopener noreferrer">
-                                <img src="/images/profile/tiktok.jpg" alt="TikTok" className="mx-auto w-6 h-6 cursor-pointer" />
-                            </a>
-                        </div>
-                        <div className="text-center">
-                            <a href={`https://twitter.com/`} target="_blank" rel="noopener noreferrer">
-                                <img src="/images/profile/x.jpg" alt="X" className="mx-auto w-6 h-6 cursor-pointer" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex justify-start items-center pt-4">
-                    <div className="text-center text-lg leading-4"> This is where you would put your caption when making a post. It is important that this works so we can make sure that the posts show correctly. </div>
-                </div>
-                <div className="flex justify-center items-center pt-4">
-                    <img src="tori.jpg" alt="Profile Picture" class="w-[28rem] h-[28rem] object-cover"></img>
-                </div>
-                <div className="flex justify-between pt-2 pb-1">
-                    <div className="flex justify-start items-center">
-                        <FontAwesomeIcon icon={faThumbsUp} size="2x" />
-                        <div className="text-center text-md leading-4 pl-2"> Like </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                        <FontAwesomeIcon icon={faComment} size="2x" />
-                        <div className="text-center text-md leading-4 pl-2"> Comment </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                        <FontAwesomeIcon icon={faAddressBook} size="2x" />
-                        <div className="text-center text-md leading-4 pl-2"> Contact </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                        <FontAwesomeIcon icon={faUserPlus} size="2x" />
-                        <div className="text-center text-md leading-4 pl-2"> Follow </div>
-                    </div>
-                </div>
+const Post = ({ post }) => {
+  return (
+    <div className="bg-white my-4 rounded-lg overflow-hidden shadow-xl max-w-[800px] mx-auto px-48 py-4"> 
+      <div className="p-4">
+        <div className="flex items-center mb-4 justify-start" style={{ marginLeft: '-180px' }}> 
+          <img src={post.profilePicture || "/images/profile/profilePic.jpg"} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
+          <div className="ml-4 flex flex-col">
+            <div className="font-semibold text-lg">{post.username || "Username"}</div>
+            <div className="flex space-x-2 mt-1">
+              <a href={`https://www.instagram.com/${post.instagram}/`} target="_blank" rel="noopener noreferrer">
+                <img src="/images/profile/instagram.jpg" alt="Instagram" className="w-4 h-4 cursor-pointer" />
+              </a>
+              <a href={`https://www.tiktok.com/@${post.tiktok}`} target="_blank" rel="noopener noreferrer">
+                <img src="/images/profile/tiktok.jpg" alt="TikTok" className="w-4 h-4 cursor-pointer" />
+              </a>
+              <a href={`https://twitter.com/${post.x}`} target="_blank" rel="noopener noreferrer">
+                <img src="/images/profile/x.jpg" alt="X" className="w-4 h-4 cursor-pointer" />
+              </a>
             </div>
+          </div>
+          <div className="flex-grow"></div>
         </div>
-    );
+
+        <div className="mb-4 " style={{ marginLeft: '-180px' }}>
+          <p className="text-gray-800 break-words">{post.caption || "An engaging caption goes here."}</p>
+        </div>
+
+        <div className="flex justify-center">
+          <div className="post-image-container w-96 h-96 flex justify-center items-center">
+            <img src={post.url || "placeholder-image.jpg"} alt="Post" className="post-image object-cover w-full h-full" />
+          </div>
+        </div>
+
+        <div className="flex justify-around items-center p-4">
+          <FontAwesomeIcon icon={faThumbsUp} size="lg" className="text-black hover:text-gray-700 transition duration-300" />
+          <FontAwesomeIcon icon={faUserPlus} size="lg" className="text-black hover:text-gray-700 transition duration-300" />
+          <FontAwesomeIcon icon={faPhone} size="lg" className="text-black hover:text-gray-700 transition duration-300" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Post;
