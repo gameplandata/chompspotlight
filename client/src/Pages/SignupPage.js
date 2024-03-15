@@ -10,15 +10,18 @@ const SignupPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [retypedPassword, setRetypedPassword] = useState('');
-  const [emailError, setEmailError] = useState(null);
+  const [type, setType] = useState('');
+  const [error, setError] = useState(null);
 
   const signup = () => {
     axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: true})
         .then(response => {
             console.log(response)
+            setError(null);
         })
-        .catch(error => {
-            console.error('There was an error:', error.response.data.error);
+        .catch(err => {
+            console.error('There was an error:', err.response.data.error);
+            setError(err.response.data.error);
             handleError();
         });
 };
@@ -28,7 +31,7 @@ const SignupPage = () => {
   };
 
   function handleError() {
-    setEmailError('email error')
+    console.log(error);
   }
 
   return (
@@ -46,6 +49,9 @@ const SignupPage = () => {
             value={firstName}
             onChange={(e) => setFirstname(e.target.value)}
           />
+          {error && error.firstName && 
+            <span className="text-sm text-red-500">*{error.firstName}</span>
+          }
           <br />
           <span>Last Name:</span>
           <input
@@ -55,6 +61,9 @@ const SignupPage = () => {
             value={lastName}
             onChange={(e) => setLastname(e.target.value)}
           />
+          {error && error.lastName && 
+            <span className="text-sm text-red-500">*{error.lastName}</span>
+          }
           <br />
           <span>Email Address:</span>
           <input
@@ -64,7 +73,9 @@ const SignupPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <span hidden={emailError == null}>{emailError}</span>
+          {error && error.email && 
+            <span className="text-sm text-red-500">*{error.email}</span>
+          }
           <br />
           <span>Username:</span>
           <input
@@ -74,40 +85,52 @@ const SignupPage = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {error && error.username && 
+            <span className="text-sm text-red-500">*{error.username}</span>
+          }
           <br />
           <span>Password:</span>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error && error.password && 
+            <span className="text-sm text-red-500">*{error.password}</span>
+          }
           <br />
           <span>Retype Password:</span>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
+            type="password"
             placeholder="Password"
             value={retypedPassword}
             onChange={(e) => setRetypedPassword(e.target.value)}
           />
+          {error && error.retypedPassword && 
+            <span className="text-sm text-red-500">*{error.retypedPassword}</span>
+          }
           <br />
           <span>I am a...</span>
-          <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white" onChange={(e) => setType(e.target.value)}>
             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <div className="flex items-center ps-3">
-                <input id="horizontal-list-radio-license" type="radio" value="" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input id="horizontal-list-radio-license" type="radio" value="athlete" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                 <label for="horizontal-list-radio-license" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Athlete </label>
               </div>
             </li>
             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <div className="flex items-center ps-3">
-                <input id="horizontal-list-radio-id" type="radio" value="" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input id="horizontal-list-radio-id" type="radio" value="sponser" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                 <label for="horizontal-list-radio-id" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sponser</label>
               </div>
             </li>
           </ul>
+          {error && error.type && 
+            <span className="text-sm text-red-500">*{error.type}</span>
+          }
           <br />
           <div className="flex flex-col justify-center items-center">
             <button
@@ -115,7 +138,11 @@ const SignupPage = () => {
               onClick={handleSignup}
             >
               Sign Up
-            </button><br />
+            </button>
+            {error && error.server && 
+            <span className="text-sm text-red-500">Something went wrong! Error: {error.server}</span>
+            }
+          <br />
           </div>
         </div><br />
 
