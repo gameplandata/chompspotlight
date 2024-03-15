@@ -1,30 +1,29 @@
 const express = require('express');
 const db = require('../database');
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
     const { firstName, lastName, email, username, password, retypedPassword, type } = req.body;
 
-    //Validate user input
-    var error = {};
     try {
-        error = await validateInput(firstName, lastName, email, username, password, retypedPassword, type);
+        //Validate user input
+        var error = await validateInput(firstName, lastName, email, username, password, retypedPassword, type);
+
+        //Send http response
+        if (Object.keys(error.error).length > 0) {
+            res.status(400).json(error)
+        } else {
+            //If no errors, then attempt signing up the user
+            await addUser(firstName, lastName, email, username, password, type)
+            res.status(200).json({ success: true })
+
+        }
     } catch (err) {
-        error = { error: { server: err.message } }
+        res.status(500).json({ error: { server: err.message } });
     }
-
-    //Send http response
-    if(error.error && error.error.server) {
-        res.status(500).json(error);
-    } else if (error != {}) {
-        res.status(400).json(error)
-    } else {
-        res.status(200).json({ msg: firstName });
-    }
-
-    //addUser(firstName, lastName, email, username, password, 'athlete')
 });
 
 async function validateInput(firstName, lastName, email, username, password, retypedPassword, type) {
@@ -79,9 +78,14 @@ async function validateInput(firstName, lastName, email, username, password, ret
 }
 
 async function addUser(firstName, lastName, email, username, password, type) {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
 
-    const rows = await db.query(`INSERT INTO Users (FirstName, LastName, UserName, Email, Password, Type) VALUES ('${firstName}', '${lastName}', '${username}', '${email}', '${password}', '${type}');`);
-    console.log(rows);
+    try {
+        await db.query(`INSERT INTO Users (FirstName, LastName, UserName, Email, Password, Type) VALUES ('${firstName}', '${lastName}', '${username}', '${email}', '${hash}', '${type}');`);
+    } catch (err) {
+        throw Error('Unable to sign up user')
+    }
 }
 
 async function doesEmailExist(email) {
