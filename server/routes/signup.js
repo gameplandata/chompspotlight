@@ -2,6 +2,11 @@ const express = require('express');
 const db = require('../database');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+
+const createToken = (userID) => {
+    return jwt.sign({UserID: userID}, process.env.SECRET, { expiresIn: '3d'})
+}
 
 const router = express.Router();
 
@@ -17,9 +22,12 @@ router.post('/', async (req, res) => {
             res.status(400).json(error)
         } else {
             //If no errors, then attempt signing up the user
-            await addUser(firstName, lastName, email, username, password, type)
-            res.status(200).json({ success: true })
+            const rows = await addUser(firstName, lastName, email, username, password, type)
+            
+            //create a token
+            const token = createToken(rows.insertId)
 
+            res.status(200).json({ success: true, token: token })
         }
     } catch (err) {
         res.status(500).json({ error: { server: err.message } });
@@ -82,7 +90,7 @@ async function addUser(firstName, lastName, email, username, password, type) {
     const hash = await bcrypt.hash(password, salt);
 
     try {
-        await db.query(`INSERT INTO Users (FirstName, LastName, UserName, Email, Password, Type) VALUES ('${firstName}', '${lastName}', '${username}', '${email}', '${hash}', '${type}');`);
+        return await db.query(`INSERT INTO Users (FirstName, LastName, UserName, Email, Password, Type) VALUES ('${firstName}', '${lastName}', '${username}', '${email}', '${hash}', '${type}');`);
     } catch (err) {
         throw Error('Unable to sign up user')
     }

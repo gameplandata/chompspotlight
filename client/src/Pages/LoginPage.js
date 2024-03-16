@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from "../Components/HeaderWithoutSearch"
@@ -10,23 +11,31 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState(null);
+
+  const login = () => {
+    axios.post('http://localhost:3001/login', { username, password })
+      .then(response => {
+        console.log(response)
+        setError(null);
+      })
+      .catch(err => {
+        console.error('There was an error:', err.response.data.error);
+        setError(err.response.data.error);
+      });
+  };
 
   const handleLogin = () => {
-    if (username !== '' && password !== '') {
-      setIsLoggedIn(true);
-    } else {
-      alert('Please enter username and password');
-    }
+    login();
   };
 
   const goToSignup = () => {
-    console.log('is this working?')
     navigate('/signup');
   };
 
   return (
     <div className="relative pb-[10vh] min-h-screen">
-      <Header/>
+      <Header />
       {isLoggedIn ? (
         <div>
           <h1>Welcome, {username}!</h1>
@@ -46,6 +55,9 @@ const LoginPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {error && error.username &&
+                <span className="text-sm text-red-500">*{error.username}</span>
+              }
               <br />
               <span>Password:</span>
               <input
@@ -55,6 +67,9 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {error && error.password &&
+                <span className="text-sm text-red-500">*{error.password}</span>
+              }
               <br />
               <div className="flex flex-col justify-center items-center">
                 <button
@@ -62,13 +77,17 @@ const LoginPage = () => {
                   onClick={handleLogin}
                 >
                   Login
-                </button><br />
+                </button>
+                {error && error.server &&
+                  <span className="text-sm text-red-500">Something went wrong! Error: {error.server}</span>
+                }
+                <br />
                 <p>Don't have an account? Create on <span className="text-blue-500 cursor-pointer" onClick={goToSignup}>here</span>!</p>
               </div>
             </div><br />
 
           </div>
-          <Footer/>
+          <Footer />
         </div>
       )}
     </div>
