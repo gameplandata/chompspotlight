@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
-import { useAuthContext } from '../Hooks/useAuthContext';
 import UserDropdown from './UserDropdown';
 
 const Header = () => {
@@ -9,7 +8,6 @@ const Header = () => {
     const [message, setMessage] = useState("");
     const [searchValue, setSearchValue] = useState("");
     const navigate = useNavigate();
-    const { user } = useAuthContext();
 
     const onHomeTextClick = useCallback(() => {
         goToHome();
