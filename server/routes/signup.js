@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
             //create a token
             const token = createToken(rows.insertId)
 
-            res.status(200).json({ success: true, token: token })
+            res.status(200).json({ userID: rows.insertId, username: username, type: type, token: token })
         }
     } catch (err) {
         res.status(500).json({ error: { server: err.message } });
@@ -78,7 +78,7 @@ async function validateInput(firstName, lastName, email, username, password, ret
     }
 
     //Account type validation
-    if (type != "athlete" && type != "sponser") {
+    if (type != "athlete" && type != "sponsor") {
         error.error.type = "Select account type";
     }
 

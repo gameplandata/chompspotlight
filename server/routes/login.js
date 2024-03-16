@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
                 res.status(400).json(error)
             } else {
                 const token = createToken(user.UserID);
-                res.status(200).json({ success: true, token})
+                res.status(200).json({ userID: user.UserID, username: user.UserName, type: user.Type, token: token })
             }
         } else {
             res.status(400).json(error)

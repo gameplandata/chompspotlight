@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Footer from '../Components/Footer';
 import Header from "../Components/HeaderWithoutSearch"
+import {useSignup } from "../Hooks/useSignup"
 
 const SignupPage = () => {
   const [firstName, setFirstname] = useState('');
@@ -11,9 +11,10 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [retypedPassword, setRetypedPassword] = useState('');
   const [type, setType] = useState('');
-  const [error, setError] = useState(null);
+  //const [error, setError] = useState(null);
+  const {signup, error, isLoading} = useSignup();
 
-  const signup = () => {
+  /*const signup = () => {
     axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: type})
         .then(response => {
             console.log("all good bro")
@@ -25,15 +26,11 @@ const SignupPage = () => {
             setError(err.response.data.error);
             handleError();
         });
-};
+};*/
 
-  const handleSignup = () => {
-      signup()
+  const handleSignup = async () => {
+      await signup(firstName, lastName, email, username, password, retypedPassword, type);
   };
-
-  function handleError() {
-    console.log(error);
-  }
 
   return (
     <div className="relative pb-[10vh] min-h-screen">
@@ -124,8 +121,8 @@ const SignupPage = () => {
             </li>
             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <div className="flex items-center ps-3">
-                <input id="horizontal-list-radio-id" type="radio" value="sponser" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                <label for="horizontal-list-radio-id" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sponser</label>
+                <input id="horizontal-list-radio-id" type="radio" value="sponsor" name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <label for="horizontal-list-radio-id" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sponsor</label>
               </div>
             </li>
           </ul>
@@ -137,6 +134,7 @@ const SignupPage = () => {
             <button
               className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
               onClick={handleSignup}
+              disabled={isLoading}
             >
               Sign Up
             </button>
