@@ -21,6 +21,8 @@ router.post('/', async (req, res) => {
                 res.status(400).json(error)
             } else {
                 const token = createToken(user.UserID);
+
+                // adjust user information sent to frontend if necessary, make sure to adjust this in signup.js as well to match
                 res.status(200).json({ userID: user.UserID, username: user.UserName, email: user.Email, name: `${user.FirstName} ${user.LastName}`, type: user.Type, token: token })
             }
         } else {

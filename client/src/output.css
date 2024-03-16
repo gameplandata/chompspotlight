@@ -1704,6 +1704,14 @@ video {
   font-weight: 600;
 }
 
+.capitalize{
+  text-transform: capitalize;
+}
+
+.italic{
+  font-style: italic;
+}
+
 .leading-10{
   line-height: 2.5rem;
 }

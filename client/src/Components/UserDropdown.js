@@ -38,31 +38,32 @@ const UserDropdown = () => {
             {user ? (
                 <div className="h-full">
                     <button id="dropdownInformationButton" onClick={handleDropDown}
-                        class="w-44 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        className="w-44 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                             {user.username} &#11167;
                     </button>
 
                     <div id="dropdownInformation" className={`${isOpen ? "block" : "hidden"} z-20 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}>
-                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                             <div>{user.name}</div>
-                            <div class="font-medium truncate">{user.email}</div>
+                            <div className="font-medium truncate">{user.email}</div>
+                            <div className="capitalize italic">{user.type}</div>
                         </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
                             <li>
-                                <span class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     onClick={goToProfilePage}>
                                     Profile
                                 </span>
                             </li>
                             <li>
-                                <span class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     onClick={goToEditProfilePage}>
                                     Account Settings
                                 </span>
                             </li>
                         </ul>
-                        <div class="py-2">
-                            <span class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        <div className="py-2">
+                            <span className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                 onClick={handleLogout}>
                                 Logout
                             </span>

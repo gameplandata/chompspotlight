@@ -21,12 +21,10 @@ router.post('/', async (req, res) => {
         if (Object.keys(error.error).length > 0) {
             res.status(400).json(error)
         } else {
-            //If no errors, then attempt signing up the user
             const rows = await addUser(firstName, lastName, email, username, password, type)
-            
-            //create a token
             const token = createToken(rows.insertId)
 
+            // adjust user information sent to frontend if necessary, make sure to adjust this in login.js as well to match
             res.status(200).json({ userID: rows.insertId, username: username, email: email, name: `${firstName} ${lastName}`, type: type, token: token })
         }
     } catch (err) {
@@ -68,8 +66,7 @@ async function validateInput(firstName, lastName, email, username, password, ret
         error.error.password = "Password is required";
 
     } else if (!validator.isStrongPassword(password)) {
-        error.error.password = "Password not strong enough";
-        //list requirements
+        error.error.password = "Password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and at least 1 symbol";
     }
 
     //Retyped password validation
