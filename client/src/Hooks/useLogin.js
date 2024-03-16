@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import axios from 'axios';
 
-export const useSignup = () => {
+export const useLogin = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
 
-    const signup = async (firstName, lastName, email, username, password, retypedPassword, type) => {
+    const login = async (username, password) => {
         setIsLoading(true)
         setError(null)
 
-        axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: type})
+        axios.post('http://localhost:3001/login', {username: username, password: password})
         .then(response => {
             localStorage.setItem('user', JSON.stringify(response.data));
             dispatch({type: 'LOGIN', payload: response.data})
@@ -22,5 +22,5 @@ export const useSignup = () => {
         });
     }
 
-    return { signup, isLoading, error };
+    return { login, isLoading, error };
 }

@@ -11,22 +11,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [retypedPassword, setRetypedPassword] = useState('');
   const [type, setType] = useState('');
-  //const [error, setError] = useState(null);
   const {signup, error, isLoading} = useSignup();
-
-  /*const signup = () => {
-    axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: type})
-        .then(response => {
-            console.log("all good bro")
-            console.log(response)
-            setError(null);
-        })
-        .catch(err => {
-            console.error('There was an error:', err.response.data.error);
-            setError(err.response.data.error);
-            handleError();
-        });
-};*/
 
   const handleSignup = async () => {
       await signup(firstName, lastName, email, username, password, retypedPassword, type);

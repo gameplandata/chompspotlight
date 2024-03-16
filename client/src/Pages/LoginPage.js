@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from "../Components/HeaderWithoutSearch"
 import '../output.css'
+import { useLogin } from '../Hooks/useLogin';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,22 +12,10 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [error, setError] = useState(null);
+  const {login, error, isLoading} = useLogin();
 
-  const login = () => {
-    axios.post('http://localhost:3001/login', { username, password })
-      .then(response => {
-        console.log(response)
-        setError(null);
-      })
-      .catch(err => {
-        console.error('There was an error:', err.response.data.error);
-        setError(err.response.data.error);
-      });
-  };
-
-  const handleLogin = () => {
-    login();
+  const handleLogin = async () => {
+    await login(username, password);
   };
 
   const goToSignup = () => {
@@ -62,7 +51,7 @@ const LoginPage = () => {
               <span>Password:</span>
               <input
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="text"
+                type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -75,6 +64,7 @@ const LoginPage = () => {
                 <button
                   className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
                   onClick={handleLogin}
+                  disabled={isLoading}
                 >
                   Login
                 </button>
