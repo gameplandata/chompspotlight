@@ -11,10 +11,14 @@ app.use(bodyParser.json());
 // Routes
 const homeRoute = require('./routes/home');
 const page1Route = require('./routes/page1'); 
+const signupRoute = require('./routes/signup'); 
+const loginRoute = require('./routes/login'); 
 
 // Use Routes
 app.use('/', homeRoute);
 app.use('/page1', page1Route);
+app.use('/signup', signupRoute);
+app.use('/login', loginRoute);
 
 // Starts Server
 app.listen(PORT, () => {
