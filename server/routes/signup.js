@@ -9,6 +9,7 @@ const createToken = (userID) => {
 }
 
 const router = express.Router();
+const usernamePattern = /^[a-zA-Z_\-.\d]*$/;
 
 router.post('/', async (req, res) => {
     const { firstName, lastName, email, username, password, retypedPassword, type } = req.body;
@@ -57,7 +58,9 @@ async function validateInput(firstName, lastName, email, username, password, ret
     //Username validation
     if (username == "") {
         error.error.username = "Username is required";
-    } else if (await doesUsernameExist(username)) {
+    } else if(!usernamePattern.test(username)) {
+        error.error.username = "Username must only contain letters, numbers, or symbols: . - _, with no spaces"
+    }else if (await doesUsernameExist(username)) {
         error.error.username = "Username already exists";
     }
 

@@ -31,6 +31,10 @@ const SignupPage = () => {
             placeholder="Robert"
             value={firstName}
             onChange={(e) => setFirstname(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.firstName && 
             <span className="text-sm text-red-500">*{error.firstName}</span>
@@ -43,6 +47,10 @@ const SignupPage = () => {
             placeholder="Brown"
             value={lastName}
             onChange={(e) => setLastname(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.lastName && 
             <span className="text-sm text-red-500">*{error.lastName}</span>
@@ -55,6 +63,10 @@ const SignupPage = () => {
             placeholder="robertbrown@gmail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.email && 
             <span className="text-sm text-red-500">*{error.email}</span>
@@ -67,6 +79,10 @@ const SignupPage = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.username && 
             <span className="text-sm text-red-500">*{error.username}</span>
@@ -79,6 +95,10 @@ const SignupPage = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.password && 
             <span className="text-sm text-red-500">*{error.password}</span>
@@ -91,6 +111,10 @@ const SignupPage = () => {
             placeholder="Password"
             value={retypedPassword}
             onChange={(e) => setRetypedPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                  handleSignup();
+              }}
           />
           {error && error.retypedPassword && 
             <span className="text-sm text-red-500">*{error.retypedPassword}</span>

@@ -42,6 +42,10 @@ const LoginPage = () => {
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter")
+                      handleLogin();
+                  }}
               />
               {error && error.username &&
                 <span className="text-sm text-red-500">*{error.username}</span>
@@ -54,6 +58,10 @@ const LoginPage = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter")
+                      handleLogin();
+                  }}
               />
               {error && error.password &&
                 <span className="text-sm text-red-500">*{error.password}</span>
