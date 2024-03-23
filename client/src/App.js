@@ -9,6 +9,7 @@ import EditProfilePage from './Pages/Profile/EditProfilePage';
 import Search from './Pages/Search'
 import Feed from './Pages/Feed'
 import { useAuthContext } from './Hooks/useAuthContext';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
   const { user } = useAuthContext();
@@ -21,8 +22,9 @@ function App() {
           <Route path="/page1" element={<Page1 />} />
           <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/"/>} />
           <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to="/"/>} />
+          {/* <Route path="/profile" element={<PrivateRoute element={<UserProfilePage element={user} />} />} /> */}
           <Route path="/profile" element={<UserProfilePage user={userInfo}/>} />
-          <Route path="/profile/edit" element={<EditProfilePage user={userInfo}/>} />
+          <Route path="/profile/edit" element={<PrivateRoute element={<EditProfilePage />} />} />
           <Route path="/search" element={<Search/>}/>
           <Route path="/feed" element={<Feed/>}/>
           <Route path="/search/:searchText" exact element={<Search/>}/>
