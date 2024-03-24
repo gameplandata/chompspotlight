@@ -15,14 +15,15 @@ const EditProfilePage = () => {
     Type: '', 
     SocialIG: '',
     SocialTikTok: '',
-    SocialX: ''
+    SocialX: '',
+    DefaultProfilePic: ''
   });
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       if (user && user.userID) {
         try {
-          const response = await axiosInstance.get(`/edit/fetch/${user.userID}`);
+          const response = await axiosInstance.get(`/profile/fetch/${user.userID}`);
           setFormDetails(response.data);
         } catch (error) {
           console.error("Error fetching user info:", error.response ? error.response.data : error.message);
@@ -47,7 +48,7 @@ const EditProfilePage = () => {
   
   const handleSave = async () => {
     try {
-      await axiosInstance.post(`/edit/update/${user.userID}`, formDetails);
+      await axiosInstance.post(`/profile/update/${user.userID}`, formDetails);
       setEditMode(false);
     } catch (error) {
       console.error("Error updating user info:", error.response ? error.response.data : error.message);
@@ -127,7 +128,7 @@ const EditProfilePage = () => {
           {/* Profile Picture */}
           <div className="mb-5">
             <label htmlFor="profilePic" className="mb-3 block text-base font-medium">Edit Profile Picture</label>
-            <input type="text" id="profilePic" name="profilePicture" value={formDetails.profilePicture} onChange={handleChange} placeholder="Profile Picture" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="profilePic" name="profilePicture" value={formDetails.DefaultProfilePic} onChange={handleChange} placeholder="Profile Picture" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Edit and Save/Cancel Buttons */}

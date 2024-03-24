@@ -1,42 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Header from "../../Components/HeaderWithoutSearch"
 import Footer from "../../Components/Footer"
 import PostModal from './PostModal';
+import { useAuthContext } from '../../Hooks/useAuthContext';
+import axiosInstance from '../../axiosConfig';
 
-const userInfo = {
-  userName: 'username',
-  name: 'name',
-  lastname: 'lastname',
-  email: 'email@ufl.edu',
-  password: 'password',
-  type: 'athlete/sponsor',
-  profilePicture: '/images/profile/profilePic.jpg',
-  instagram: "instagram",
-  tiktok: "tiktok",
-  x: "x",
-  posts: [
-    { url: "/images/profile/post1.jpg" },
-    { url: "/images/profile/post2.jpg" },
-    { url: "/images/profile/post3.jpg" },
-    { url: "/images/profile/post4.jpg" },
-    { url: "/images/profile/post5.jpg" },
-    { url: "/images/profile/post6.jpg" },
-    { url: "/images/profile/post7.jpg" }
-  ]
-};
-
-const UserProfilePage = ({ user }) => {
-  const navigate = useNavigate(); 
+const UserProfilePage = () => {
+  const baseURL = "http://localhost:3001"; 
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activePost, setActivePost] = useState(null);
+  const { user } = useAuthContext();
+  const [userPosts, setUserPosts] = useState([]);
+  const [userProfile, setUserProfile] = useState({
+    UserName: '',
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    Type: '',
+    SocialIG: '',
+    SocialTikTok: '',
+    SocialX: '',
+    DefaultProfilePic: ''
+  });
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (user && user.userID) {
+        try {
+          const response = await axiosInstance.get(`/profile/fetch/${user.userID}`);
+          setUserProfile({ ...response.data, posts: response.data.posts || [] });
+        } catch (error) {
+          console.error("Error fetching user info:", error.response ? error.response.data : error.message);
+        }
+      }
+    };
+
+    fetchUserInfo();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+      if (user && user.userID) {
+        try {
+          const response = await axiosInstance.get(`/profile/user/${user.userID}/posts`);
+          setUserPosts(response.data); 
+        } catch (error) {
+            console.error("Error fetching user posts:", error);
+        }
+      }
+    };
+
+    fetchUserPosts();
+  }, [user]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   const goToEditProfile = () => {
-    navigate('/profile/edit'); 
+    navigate('/profile/edit');
   };
 
   const handlePostClick = (post) => {
@@ -68,52 +92,52 @@ const UserProfilePage = ({ user }) => {
           </div>
 
         <div className="text-center mt-4 mb-7">
-          <span className="text-lg font-bold">{user.userName}</span>
+          <span className="text-lg font-bold">{userProfile.UserName}</span>
         </div>
   
         <div className="flex flex-col items-center justify-center space-y-4 md:space-y-0 md:flex-row md:space-x-28">
           <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full">Follow</button>
           
           <div className="w-52 h-52">
-            <img src={user.profilePicture} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
+            <img src={userProfile.DefaultProfilePic} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
           </div>
   
           <button className="bg-gray-300 text-black font-bold py-2 px-12 rounded-full">Message</button>
         </div>
         
         <div className="text-center mt-4">
-          <span className="text-lg font-bold">{user.name}</span>
+          <span className="text-lg font-bold">{userProfile.FirstName} {userProfile.LastName}</span>
         </div>
   
         <div className="grid grid-cols-3 divide-x divide-gray-300 w-full max-w-4xl mx-auto mt-4">
           <div className="text-center">
-            <a href={`https://www.instagram.com/${user.instagram}/`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://www.instagram.com/${userProfile.SocialIG}/`} target="_blank" rel="noopener noreferrer">
               <img src="/images/profile/instagram.jpg" alt="Instagram" className="mx-auto w-6 h-6 cursor-pointer" />
             </a>
           </div>
 
           <div className="text-center">
-            <a href={`https://www.tiktok.com/@${user.tiktok}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://www.tiktok.com/@${userProfile.SocialTikTok}`} target="_blank" rel="noopener noreferrer">
               <img src="/images/profile/tiktok.jpg" alt="TikTok" className="mx-auto w-6 h-6 cursor-pointer" />
             </a>
           </div>
 
           <div className="text-center">
-            <a href={`https://twitter.com/${user.x}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://twitter.com/${userProfile.SocialX}`} target="_blank" rel="noopener noreferrer">
               <img src="/images/profile/x.jpg" alt="X" className="mx-auto w-6 h-6 cursor-pointer" />
             </a>
           </div>
         </div>
   
-        <div className="mt-8 flex justify-center">
-          <div className="grid grid-cols-3 gap-2 md:gap-1 mx-auto"> 
-            {user.posts.map((post, index) => (
-              <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto" onClick={() => handlePostClick(post)}> 
-                <img src={post.url} alt={`Post ${index + 1}`} className="object-cover w-full h-full cursor-pointer"/>
-              </div>
-            ))}
-          </div>
+      <div className="mt-8 flex justify-center">
+        <div className="grid grid-cols-3 gap-2 md:gap-1 mx-auto"> 
+          {userPosts.map((post, index) => (
+            <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto" onClick={() => handlePostClick(post)}> 
+              <img src={`${baseURL}/media/${post.MediaURL}`} alt={`Post ${index}`} className="object-cover w-full h-full cursor-pointer"/>
+            </div>
+          ))}
         </div>
+      </div>
         {activePost && <PostModal post={activePost} onClose={closePostModal} />}
       </div>
       <Footer/>
@@ -124,4 +148,3 @@ const UserProfilePage = ({ user }) => {
 };
 
 export default UserProfilePage;
-export { userInfo };
