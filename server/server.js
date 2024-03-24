@@ -16,6 +16,7 @@ const page1Route = require('./routes/page1');
 const signupRoute = require('./routes/signup'); 
 const loginRoute = require('./routes/login'); 
 const profileRoute = require('./routes/profile');
+const userRoute = require('./routes/user');
 
 // Use Routes
 app.use('/', homeRoute);
@@ -23,6 +24,7 @@ app.use('/page1', page1Route);
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
 app.use('/profile', profileRoute);
+app.use('/user', userRoute);
 
 // Starts Server
 app.listen(PORT, () => {

@@ -47,8 +47,6 @@ router.post('/update/:id', authenticateToken, async (req, res) => {
   }
 });
 
-module.exports = router;
-
 // Endpoint to get user posts & user info
 router.get('/user/:id/posts', authenticateToken, async (req, res) => {
   const userId = req.params.id;
@@ -83,3 +81,5 @@ router.get('/user/:id/posts', authenticateToken, async (req, res) => {
       res.status(500).json({ message: 'Server error while fetching media URLs' });
   }
 });
+
+module.exports = router;
