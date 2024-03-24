@@ -1,42 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../Hooks/useAuthContext';
+import axiosInstance from '../../axiosConfig';
 
-const EditProfilePage = ({ userInfo }) => {
+const EditProfilePage = () => {
   const navigate = useNavigate();
+  const {user} = useAuthContext();
   const [editMode, setEditMode] = useState(false);
-  const [formDetails, setFormDetails] = useState(userInfo || {
-    userName: '',
-    name: '',
-    lastname: '',
-    email: '',
-    password: '',
-    type: 'Athlete',
-    profilePicture: '/images/profile/profilePic.jpg',
-    instagram: '',
-    tiktok: '',
-    x: ''
+  const [formDetails, setFormDetails] = useState({
+    UserName: '',
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    Type: '', 
+    SocialIG: '',
+    SocialTikTok: '',
+    SocialX: '',
+    DefaultProfilePic: ''
   });
-  const [tempFormDetails, setTempFormDetails] = useState(formDetails);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (user && user.userID) {
+        try {
+          const response = await axiosInstance.get(`/profile/fetch/${user.userID}`);
+          setFormDetails(response.data);
+        } catch (error) {
+          console.error("Error fetching user info:", error.response ? error.response.data : error.message);
+        }
+      }
+    };
+
+    fetchUserInfo();
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTempFormDetails({
-      ...tempFormDetails,
+    setFormDetails(prevState => ({
+      ...prevState,
       [name]: value,
-    });
+    }));
   };
 
   const handleEdit = () => {
     setEditMode(true);
   };
-
-  const handleSave = () => {
-    setFormDetails(tempFormDetails);
-    setEditMode(false);
+  
+  const handleSave = async () => {
+    try {
+      await axiosInstance.post(`/profile/update/${user.userID}`, formDetails);
+      setEditMode(false);
+    } catch (error) {
+      console.error("Error updating user info:", error.response ? error.response.data : error.message);
+    }
   };
 
   const handleCancel = () => {
-    setTempFormDetails(formDetails);
     setEditMode(false);
   };
 
@@ -53,57 +72,63 @@ const EditProfilePage = ({ userInfo }) => {
           {/* User Name */}
           <div className="mb-5">
             <label htmlFor="userName" className="mb-3 block text-base font-medium">User Name</label>
-            <input type="text" id="userName" name="userName" value={tempFormDetails.userName} onChange={handleChange} placeholder="User Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="userName" name="UserName" value={formDetails.UserName} onChange={handleChange} placeholder="User Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Name */}
           <div className="mb-5">
-            <label htmlFor="name" className="mb-3 block text-base font-medium">Name</label>
-            <input type="text" id="name" name="name" value={tempFormDetails.name} onChange={handleChange} placeholder="Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <label htmlFor="name" className="mb-3 block text-base font-medium">First Name</label>
+            <input type="text" id="name" name="FirstName" value={formDetails.FirstName} onChange={handleChange} placeholder="Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Last Name */}
           <div className="mb-5">
             <label htmlFor="lastname" className="mb-3 block text-base font-medium">Last Name</label>
-            <input type="text" id="lastname" name="lastname" value={tempFormDetails.lastname} onChange={handleChange} placeholder="Last Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="lastname" name="LastName" value={formDetails.LastName} onChange={handleChange} placeholder="Last Name" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Email */}
           <div className="mb-5">
             <label htmlFor="email" className="mb-3 block text-base font-medium">Email</label>
-            <input type="email" id="email" name="email" value={tempFormDetails.email} onChange={handleChange} placeholder="Email" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="email" id="email" name="Email" value={formDetails.Email} onChange={handleChange} placeholder="Email" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Password */}
-          <div className="mb-5">
+          {/* <div className="mb-5">
             <label htmlFor="password" className="mb-3 block text-base font-medium">Password</label>
-            <input type="password" id="password" name="password" value={tempFormDetails.password} onChange={handleChange} placeholder="Password" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
-          </div>
+            <input type="password" id="password" name="password" value={formDetails.password} onChange={handleChange} placeholder="Password" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+          </div> */}
 
           {/* Type - Not Editable */}
           <div className="mb-5">
             <label htmlFor="type" className="mb-3 block text-base font-medium">Type</label>
             <div id="type" className="w-full rounded-md border border-[#e0e0e0] bg-gray-200 py-3 px-3 text-base font-medium text-gray-700 cursor-not-allowed">
-              {formDetails.type}
+              {formDetails.Type}
             </div>
           </div>
 
           {/* Instagram */}
           <div className="mb-5">
             <label htmlFor="instagram" className="mb-3 block text-base font-medium">Instagram</label>
-            <input type="text" id="instagram" name="instagram" value={tempFormDetails.instagram} onChange={handleChange} placeholder="Instagram" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="instagram" name="SocialIG" value={formDetails.SocialIG} onChange={handleChange} placeholder="Instagram" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* TikTok */}
           <div className="mb-5">
             <label htmlFor="tiktok" className="mb-3 block text-base font-medium">TikTok</label>
-            <input type="text" id="tiktok" name="tiktok" value={tempFormDetails.tiktok} onChange={handleChange} placeholder="TikTok" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="tiktok" name="SocialTikTok" value={formDetails.SocialTikTok} onChange={handleChange} placeholder="TikTok" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* X */}
           <div className="mb-5">
             <label htmlFor="x" className="mb-3 block text-base font-medium">X</label>
-            <input type="text" id="x" name="x" value={tempFormDetails.x} onChange={handleChange} placeholder="X" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+            <input type="text" id="x" name="SocialX" value={formDetails.SocialX} onChange={handleChange} placeholder="X" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
+          </div>
+
+          {/* Profile Picture */}
+          <div className="mb-5">
+            <label htmlFor="profilePic" className="mb-3 block text-base font-medium">Edit Profile Picture</label>
+            <input type="text" id="profilePic" name="profilePicture" value={formDetails.DefaultProfilePic} onChange={handleChange} placeholder="Profile Picture" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
           {/* Edit and Save/Cancel Buttons */}

@@ -1,24 +1,28 @@
 const express = require('express'); 
 const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
+const path = require('path');
 
 // Configures Application
 const app = express();
 const PORT = 3001;
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/media', express.static(path.join(__dirname, 'media')));
 
 // Routes
 const homeRoute = require('./routes/home');
 const page1Route = require('./routes/page1'); 
 const signupRoute = require('./routes/signup'); 
 const loginRoute = require('./routes/login'); 
+const profileRoute = require('./routes/profile');
 
 // Use Routes
 app.use('/', homeRoute);
 app.use('/page1', page1Route);
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
+app.use('/profile', profileRoute);
 
 // Starts Server
 app.listen(PORT, () => {
