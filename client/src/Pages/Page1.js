@@ -30,7 +30,6 @@ function Page1() {
 
     //Example post call to page1.js in backend
     const addDeveloper = (name, email) => {
-        console.log("bro")
         axios.post('http://localhost:3001/page1', { Name: devName, Email: devEmail })
             .then(response => {
                 console.log(response)

@@ -138,13 +138,11 @@ const UserProfilePage = () => {
           ))}
         </div>
       </div>
-        {activePost && <PostModal post={activePost} onClose={closePostModal} />}
+        {activePost && <PostModal post={activePost} deletable={true} onClose={closePostModal} />}
       </div>
       <Footer/>
     </div>
   );
-  
-    
 };
 
 export default UserProfilePage;
