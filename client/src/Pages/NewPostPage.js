@@ -3,8 +3,10 @@ import Header from "../Components/HeaderWithoutSearch";
 import Footer from "../Components/Footer";
 import { useAuthContext } from '../Hooks/useAuthContext';
 import axiosInstance from '../axiosConfig';
+import { useNavigate } from 'react-router-dom'; 
 
 const NewPostPage = () => {
+  const navigate = useNavigate();
   const {user} = useAuthContext();
   const [media, setMedia] = useState(null);
   const [description, setDescription] = useState('');
@@ -22,28 +24,6 @@ const NewPostPage = () => {
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
-
-  const handleSubmit1 = async (event) => {
-    event.preventDefault();
-    console.log("Finalizing post with", { media, description });
-
-    try {
-        if (media) {
-            // Send UserID, MediaURL, and Description in a single request
-            const response = await axiosInstance.post(`/profile/post/new/${user.userID}`, {
-                UserID: user.userID,
-                MediaURL: "post", 
-                Description: description
-            });
-
-            const { PostID } = response.data;
-            console.log("Post created with PostID:", PostID);
-        } 
-    } catch (error) {
-        console.error("Error making post:", error.response ? error.response.data : error.message);
-    }
-    resetForm();
-};
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +44,8 @@ const handleSubmit = async (event) => {
         console.error("Error making post:", error.response ? error.response.data : error.message);
     }
 
-    resetForm(); 
+    resetForm();
+    navigate('/profile'); 
 };
 
   const resetForm = () => {
@@ -77,6 +58,11 @@ const handleSubmit = async (event) => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
       <Header />
+      <button onClick={() => navigate('/profile')} className="absolute left-0 top-14 ml-4 mt-4 rounded-full p-2 hover:bg-gray-200 transition duration-150 ease-in-out">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
       <form className="space-y-6 bg-white shadow-sm rounded-lg p-6">
         <div>
           <label className="block text-sm font-medium text-gray-900">Upload Picture or Video</label>
