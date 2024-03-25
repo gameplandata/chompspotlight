@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-const Post = ({ post }) => {
+const Post = ({ post, showInteractions }) => {
   const baseURL = "http://localhost:3001"; 
   console.log(post);
   return (
@@ -39,10 +39,12 @@ const Post = ({ post }) => {
           </div>
         </div>
 
+      {showInteractions && (
         <div className="flex justify-around items-center p-4">
           <FontAwesomeIcon icon={faUserPlus} size="lg" className="text-black hover:text-gray-700 transition duration-300" />
           <FontAwesomeIcon icon={faEnvelope} size="lg" className="text-black hover:text-gray-700 transition duration-300" />
         </div>
+      )}
       </div>
     </div>
   );

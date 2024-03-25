@@ -63,6 +63,10 @@ const UserProfilePage = () => {
     navigate('/profile/edit');
   };
 
+  const goToNewPost = () => {
+    navigate('/post/new');
+  };
+
   const handlePostClick = (post) => {
     setActivePost(post);
   };
@@ -86,6 +90,7 @@ const UserProfilePage = () => {
                 </div>
                 <ul className="flex flex-col p-4">
                   <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToEditProfile}>Edit Profile</li>
+                  <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToNewPost}>New Post</li>
                 </ul>
               </aside>
             )}
@@ -96,13 +101,13 @@ const UserProfilePage = () => {
         </div>
   
         <div className="flex flex-col items-center justify-center space-y-4 md:space-y-0 md:flex-row md:space-x-28">
-          <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full">Follow</button>
+          {/* <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full">Follow</button> */}
           
           <div className="w-52 h-52">
             <img src={userProfile.DefaultProfilePic} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
           </div>
   
-          <button className="bg-gray-300 text-black font-bold py-2 px-12 rounded-full">Message</button>
+          {/* <button className="bg-gray-300 text-black font-bold py-2 px-12 rounded-full">Message</button> */}
         </div>
         
         <div className="text-center mt-4">
@@ -138,7 +143,7 @@ const UserProfilePage = () => {
           ))}
         </div>
       </div>
-        {activePost && <PostModal post={activePost} deletable={true} onClose={closePostModal} />}
+        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onClose={closePostModal} />}
       </div>
       <Footer/>
     </div>
