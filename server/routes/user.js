@@ -46,11 +46,8 @@ router.get('/:id/posts', async (req, res) => { //, authenticateToken
   try {
       const mediaUrls = await query(sql, [userId]);
 
-      if (mediaUrls.length > 0) {
-          res.json(mediaUrls);
-      } else {
-          res.status(404).json({ message: 'No media found for this user.' });
-      }
+      // Instead of returning a 404 error when no media is found, return an empty list
+      res.json(mediaUrls.length > 0 ? mediaUrls : []);
   } catch (error) {
       console.error('Error fetching media URLs:', error);
       res.status(500).json({ message: 'Server error while fetching media URLs' });

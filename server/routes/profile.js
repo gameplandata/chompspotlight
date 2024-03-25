@@ -2,6 +2,10 @@ const express = require('express');
 const { query } = require('../database'); 
 const authenticateToken = require('../authenticateToken'); 
 
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+
 const router = express.Router();
 
 // Endpoint to fetch user profile information
@@ -26,7 +30,7 @@ router.get('/fetch/:id', authenticateToken, async (req, res) => {
 // Endpoint to update user profile information
 router.post('/update/:id', authenticateToken, async (req, res) => {
   const userID = req.params.id;
-  const { UserName, FirstName, LastName, Email, SocialIG, SocialTikTok, SocialX, DefaultProfilePic } = req.body; // Extracting user info from request body
+  const { UserName, FirstName, LastName, Email, SocialIG, SocialTikTok, SocialX, DefaultProfilePic } = req.body; 
 
   try {
     const updateSql = `
@@ -71,14 +75,49 @@ router.get('/user/:id/posts', authenticateToken, async (req, res) => {
   try {
       const mediaUrls = await query(sql, [userId]);
 
-      if (mediaUrls.length > 0) {
-          res.json(mediaUrls);
-      } else {
-          res.status(404).json({ message: 'No media found for this user.' });
-      }
+      // Instead of returning a 404 error when no media is found, return an empty list
+      res.json(mediaUrls.length > 0 ? mediaUrls : []);
   } catch (error) {
       console.error('Error fetching media URLs:', error);
       res.status(500).json({ message: 'Server error while fetching media URLs' });
+  }
+});
+
+// Endpoint to insert UserID & PostID in UserPosts and insert PostID, MediaURL, Description in PostMedia
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post('/post/new/:id', authenticateToken, upload.single('media'), async (req, res) => {
+  const UserID = req.params.id; // Or extract UserID from token if it's encoded there
+  const { Description } = req.body; // Extract description from form data
+
+  try {
+      // Insert into UserPosts to generate a PostID
+      const insertUserPostSql = `INSERT INTO UserPosts (UserID) VALUES (?)`;
+      const userPostResult = await query(insertUserPostSql, [UserID]);
+      const PostID = userPostResult.insertId;
+
+      if (req.file) {
+          const fileExtension = path.extname(req.file.originalname);
+          const filename = `${PostID}${fileExtension}`;
+          const filePath = path.join('media', filename);
+
+          // Save the file from memory to disk
+          fs.writeFileSync(path.join(__dirname, '..', filePath), req.file.buffer);
+
+          // Insert into PostMedia using the generated PostID
+          const MediaURL = `${filename}`; 
+          const insertPostMediaSql = `INSERT INTO PostMedia (PostID, MediaURL, Description) VALUES (?, ?, ?)`;
+          await query(insertPostMediaSql, [PostID, MediaURL, Description || null]);
+
+          res.json({ message: 'Post and media uploaded successfully', PostID, MediaURL });
+      } else {
+          // Handle case when no media file is uploaded, if necessary
+          res.status(400).json({ message: 'Media file is required.' });
+      }
+  } catch (error) {
+      console.error('Error in post creation:', error);
+      res.status(500).json({ message: 'Server error' });
   }
 });
 
