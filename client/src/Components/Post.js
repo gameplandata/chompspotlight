@@ -11,7 +11,7 @@ const Post = ({ post, showInteractions }) => {
         <div className="flex items-center mb-4 justify-start" style={{ marginLeft: '-180px' }}> 
           <img src={post.DefaultProfilePic || "/images/profile/profilePic.jpg"} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
           <div className="ml-4 flex flex-col">
-            <div className="font-semibold text-lg">{post.UserName || "Username"}</div>
+            <div className="font-semibold text-lg">{post.username || "Username"}</div>
             <div className="flex space-x-2 mt-1">
               <a href={`https://www.instagram.com/${post.SocialIG}/`} target="_blank" rel="noopener noreferrer">
                 <img src="/images/profile/instagram.jpg" alt="Instagram" className="w-4 h-4 cursor-pointer" />
@@ -29,13 +29,13 @@ const Post = ({ post, showInteractions }) => {
 
         {/* Post caption */}
         <div className="mb-4 " style={{ marginLeft: '-180px' }}>
-          <p className="text-gray-800 break-words">{post.Description || "An engaging caption goes here."}</p>
+          <p className="text-gray-800 break-words">{post.caption || "No Caption"}</p>
         </div>
 
         {/* Image display*/}
         <div className="flex justify-center">
           <div className="post-image-container w-96 h-96 flex justify-center items-center">
-            <img src={`${baseURL}/media/${post.MediaURL}`} alt="Post" className="post-image object-cover w-full h-full" />
+            <img src={`${baseURL}/media/${post.url}`} alt="Post" className="post-image object-cover w-full h-full" />
           </div>
         </div>
 

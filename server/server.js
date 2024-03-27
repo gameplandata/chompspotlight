@@ -17,6 +17,7 @@ const signupRoute = require('./routes/signup');
 const loginRoute = require('./routes/login'); 
 const profileRoute = require('./routes/profile');
 const userRoute = require('./routes/user');
+const feedRoute = require('./routes/feed');
 
 // Use Routes
 app.use('/', homeRoute);
@@ -25,7 +26,7 @@ app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
 app.use('/profile', profileRoute);
 app.use('/user', userRoute);
-
+app.use('/feed', require('./routes/feed'));
 // Starts Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
