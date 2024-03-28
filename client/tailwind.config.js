@@ -11,6 +11,9 @@ module.exports = {
         '18': '4.5rem',
         '84': '21rem'
       },
+      backgroundImage: theme => ({
+        'test': "url('../public/images/background/feed.jpg')",
+      }),
     },
   },
   plugins: [],

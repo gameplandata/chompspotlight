@@ -4,29 +4,6 @@ import Header from '../Components/HeaderWithoutSearch';
 import Footer from '../Components/Footer';
 import axios from 'axios';
 
-// const mockPost = [
-//   {
-//     id: 1,
-//     username: "test1",
-//     profilePicture: "tori.jpg",
-//     url: "tori.jpg",
-//     caption: "An engaging caption goes here.",
-//     instagram: "instagram",
-//     tiktok: "tiktok",
-//     x: "x",
-//   },
-//   {
-//     id: 2,
-//     username: "test1",
-//     profilePicture: "tori.jpg",
-//     url: "/images/profile/post2.jpg",
-//     caption: "An engaging caption goes here.",
-//     instagram: "instagram",
-//     tiktok: "tiktok",
-//     x: "x",
-//   }
-// ];
-
 function Feed() {
   const [posts, setPosts] = useState([]);
 
@@ -47,9 +24,11 @@ function Feed() {
 
 
   return (
-    <div className="relative bg-white min-h-screen pt-20 pb-[20vh] flex justify-center items-center">
-      <Header />
-      <div className="my-5">
+    <div className="relative min-h-screen pt-20 pb-[20vh] flex justify-center items-center">
+      <div
+        className="fixed inset-0 z-0 w-full h-full bg-cover bg-test bg-center"/>
+        <Header/>
+      <div className="my-5 z-10">
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
