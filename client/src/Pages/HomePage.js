@@ -19,6 +19,10 @@ const HomePage = () => {
     navigate("/feed");
   };
 
+  const goToSignupPage = () => {
+    navigate("/signup");
+  };
+
   return (
     <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif pb-[10vh] min-h-screen">
       <header className="fixed top-0 w-full z-10"><Header /></header>
@@ -46,7 +50,7 @@ const HomePage = () => {
               </button>
               <button
                 className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
-                onClick={onSecondayContainerClick}
+                onClick={goToSignupPage}
               >
                 <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem] ">
                   Create Athlete Profile
@@ -197,7 +201,7 @@ const HomePage = () => {
             </div>
             <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200">
               <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
-              <div className="self-stretch flex-1 relative bg-[url('/public/natalie.jpg')] bg-contain bg-no-repeat bg-center">
+                <div className="self-stretch flex-1 relative bg-[url('/public/natalie.jpg')] bg-contain bg-no-repeat bg-center">
                   <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
                     <div className="relative leading-[0.89rem] font-medium">
                       Softball
@@ -227,7 +231,7 @@ const HomePage = () => {
             </div>
             <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200">
               <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
-              <div className="self-stretch flex-1 relative bg-[url('/public/megan.jpg')] bg-contain bg-no-repeat bg-center">
+                <div className="self-stretch flex-1 relative bg-[url('/public/megan.jpg')] bg-contain bg-no-repeat bg-center">
                   <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
                     <div className="relative leading-[0.89rem] font-medium">
                       Soccer
@@ -240,7 +244,7 @@ const HomePage = () => {
                   Megan Hinnenkamp
                 </div>
                 <div className="self-stretch relative text-[1.11rem] leading-[1.56rem] font-medium inline-block overflow-hidden text-ellipsis whitespace-nowrap h-[1.56rem] shrink-0">
-                2023 All-SEC Second Team
+                  2023 All-SEC Second Team
                 </div>
                 <div className="self-stretch flex flex-row items-center justify-start gap-[0.44rem] text-center">
                   <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
@@ -395,7 +399,7 @@ const HomePage = () => {
           get to know them better before entering into an agreement.
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
