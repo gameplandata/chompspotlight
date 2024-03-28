@@ -59,11 +59,11 @@ const Header = () => {
             </div>
             <div className="h-full bg-white flex flex-row items-center justify-center gap-[2.22rem] text-[0.89rem]">
                 <div 
-                    className="relative leading-[1.33rem] cursor-pointer"
+                    className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
                     onClick={onHomeTextClick}
                     >Home</div>
-                <div className="relative leading-[1.33rem]">Athletes</div>
-                <div className="relative leading-[1.33rem]">Sponsors</div>
+                <div className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all">Athletes</div>
+                <div className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all">Sponsors</div>
                 <UserDropdown/>
             </div>
         </div>
