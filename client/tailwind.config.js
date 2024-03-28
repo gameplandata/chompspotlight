@@ -12,7 +12,7 @@ module.exports = {
         '84': '21rem'
       },
       backgroundImage: theme => ({
-        'test': "url('../public/images/background/feed.jpg')",
+        'feed': "url('../public/images/background/feed.jpg')",
       }),
     },
   },

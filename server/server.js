@@ -26,7 +26,7 @@ app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
 app.use('/profile', profileRoute);
 app.use('/user', userRoute);
-app.use('/feed', require('./routes/feed'));
+app.use('/feed', feedRoute);
 // Starts Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

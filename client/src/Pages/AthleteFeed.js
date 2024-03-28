@@ -4,16 +4,16 @@ import Header from '../Components/HeaderWithoutSearch';
 import Footer from '../Components/Footer';
 import axios from 'axios';
 
-function Feed() {
+function AthleteFeed() {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = () => {
-    axios.get('http://localhost:3001/feed')
+    axios.get('http://localhost:3001/feed/athlete')
       .then(response => {
         setPosts(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the products:', error);
+        console.error('There was an error fetching the athlete posts:', error);
       });
   };
 
@@ -39,4 +39,4 @@ function Feed() {
 }
 
 
-export default Feed;
+export default AthleteFeed;
