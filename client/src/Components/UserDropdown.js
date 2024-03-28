@@ -72,8 +72,8 @@ const UserDropdown = () => {
                 </div>
             ) : (
                 <div className="flex flex-row gap-[2.22rem]">
-                    <div className="relative leading-[1.33rem] cursor-pointer" onClick={goToLoginPage}>Login</div>
-                    <div className="relative leading-[1.33rem] cursor-pointer" onClick={goToSignupPage}>Sign Up</div>
+                    <div className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all" onClick={goToLoginPage}>Login</div>
+                    <div className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all" onClick={goToSignupPage}>Sign Up</div>
                 </div>
 
             )}
