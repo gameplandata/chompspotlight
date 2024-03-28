@@ -41,6 +41,10 @@ const Header = () => {
         navigate("/feed/athlete");
     };
 
+    const goToSponsorFeed = () => {
+        navigate("/feed/sponsor");
+    };
+
     return (
         <div className="overflow-visible font-sans fixed top-0 w-full z-10 top-0 left-0 bg-white shadow-[0px_0px_6px_rgba(0,_0,_0,_0.12)] h-[4.44rem] shrink-0 flex flex-row items-center justify-center p-[1.11rem] box-border gap-[1.11rem] z-[0] text-left text-[1.56rem]">
             <img
@@ -70,13 +74,16 @@ const Header = () => {
                     className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
                     onClick={onHomeTextClick}
                 >Home</div>
-                <div 
+                <div
                     className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
                     onClick={goToAthleteFeed}
                 >Athletes</div>
-            <div className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all">Sponsors</div>
-            <UserDropdown />
-        </div>
+                <div
+                    className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
+                    onClick={goToSponsorFeed}
+                >Sponsors</div>
+                <UserDropdown />
+            </div>
         </div >
     );
 };
