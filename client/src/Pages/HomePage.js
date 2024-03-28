@@ -128,7 +128,7 @@ const HomePage = () => {
                     Post to Feed
                   </h4>
                   <p className="mb-3 text-black text-base leading-10">
-                    Communicate with sponsors, share your story, and negotiate NIL deals.
+                    Then athletes will make posts on the feed to allow sponsors to see their profile.
                   </p>
                 </div>
               </li>
