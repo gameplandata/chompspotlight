@@ -1,5 +1,5 @@
 const express = require('express');
-const { query } = require('../database'); 
+const { query, pool } = require('../database'); 
 const authenticateToken = require('../authenticateToken'); 
 
 const multer = require('multer');
@@ -118,6 +118,47 @@ router.post('/post/new/:id', authenticateToken, upload.single('media'), async (r
   } catch (error) {
       console.error('Error in post creation:', error);
       res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Endpoint to delete a post
+router.delete('/posts/:PostID', authenticateToken, async (req, res) => {
+  const postID = req.params.PostID;
+  let connection;
+
+  try {
+    connection = await pool.getConnection();
+    
+    await connection.beginTransaction();
+
+    // Fetch MediaURL before deletion
+    const [media] = await connection.query(`SELECT MediaURL FROM PostMedia WHERE PostID = ?`, [postID]);
+    const mediaURL = media[0]?.MediaURL;
+
+    // Proceed with deletion in the database
+    await connection.query(`DELETE FROM PostMedia WHERE PostID = ?`, [postID]);
+    await connection.query(`DELETE FROM UserPosts WHERE PostID = ?`, [postID]);
+
+    await connection.commit();
+
+    // If a media file exists, delete it from the filesystem
+    if (mediaURL) {
+      const filePath = path.join(__dirname, '..', 'media', mediaURL);
+      fs.unlink(filePath, (err) => {
+        if (err) console.error("Error deleting media file:", err);
+        // Log or handle error when file deletion fails
+      });
+    }
+    
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    // Rollback the transaction on error
+    if (connection) await connection.rollback();
+    console.error('Error deleting post:', error);
+    res.status(500).json({ message: 'Server error while deleting post' });
+  } finally {
+    // Release the connection back to the pool
+    if (connection) await connection.release();
   }
 });
 

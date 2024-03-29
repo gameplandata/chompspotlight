@@ -55,6 +55,21 @@ const UserProfilePage = () => {
     fetchUserPosts();
   }, [user]);
 
+  const deletePost = async (postId) => {
+    try {
+      await axiosInstance.delete(`/profile/posts/${postId}`);
+      
+      const updatedPosts = userPosts.filter(post => post.PostID !== postId);
+      setUserPosts(updatedPosts);
+      
+      setActivePost(null);
+      
+    } catch (error) {
+      console.error("Failed to delete post", error);
+      alert("Failed to delete the post. Please try again.");
+    }
+  };  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -143,7 +158,7 @@ const UserProfilePage = () => {
           ))}
         </div>
       </div>
-        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onClose={closePostModal} />}
+        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onDelete={() => deletePost(activePost.PostID)} onClose={closePostModal} />}
       </div>
       <Footer/>
     </div>
