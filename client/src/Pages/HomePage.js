@@ -3,12 +3,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../Components/HeaderWithSearch";
 import Footer from "../Components/Footer";
+import { useAuthContext } from "../Hooks/useAuthContext";
+
 
 
 const HomePage = () => {
 
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const { user } = useAuthContext();
+
 
   const onSecondayContainerClick = useCallback(() => {
     // Please sync "Feed" to the project
@@ -22,6 +26,10 @@ const HomePage = () => {
   const goToSignupPage = () => {
     navigate("/signup");
   };
+
+  const goToProfile = () => {
+    navigate("/profile");
+  }
 
   return (
     <div className="relative bg-white w-full flex flex-col items-center justify-start box-border text-center text-4xl text-black font-serif pb-[10vh] min-h-screen">
@@ -48,14 +56,24 @@ const HomePage = () => {
                   View Feed
                 </div>
               </button>
-              <button
-                className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
-                onClick={goToSignupPage}
-              >
-                <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem] ">
-                  Create Athlete Profile
-                </div>
-              </button>
+              {user ? (
+                <button
+                  className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
+                  onClick={goToProfile}
+                >
+                  <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem] ">
+                    View Profile
+                  </div>
+                </button>
+              ) : (
+                <button
+                  className="rounded-lg flex flex-col items-center justify-center p-[0.67rem] cursor-pointer border-[1px] border-solid border-black hover:bg-blue-700"
+                  onClick={goToSignupPage}
+                >
+                  <div className="relative leading-[1.33rem] font-medium inline-block w-[9rem] ">
+                    Create Athlete Profile
+                  </div>
+                </button>)}
             </div>
           </div>
         </div>
