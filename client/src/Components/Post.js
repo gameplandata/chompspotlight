@@ -1,9 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post, showInteractions }) => {
   const baseURL = "http://localhost:3001"; 
+  const navigate = useNavigate();
   console.log(post);
   return (
     <div className="bg-white my-4 rounded-lg overflow-hidden shadow-xl max-w-[800px] mx-auto px-48 py-4"> 
@@ -11,7 +13,7 @@ const Post = ({ post, showInteractions }) => {
         <div className="flex items-center mb-4 justify-start" style={{ marginLeft: '-180px' }}> 
           <img src={post.DefaultProfilePic || "/images/profile/profilePic.jpg"} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
           <div className="ml-4 flex flex-col">
-            <div className="font-semibold text-lg">{post.username || "Username"}</div>
+            <div className="font-semibold text-lg cursor-pointer hover:text-blue-500" onClick={() => navigate (`/user/${post.username}`)}>{post.username || "Username"}</div>
             <div className="flex space-x-2 mt-1">
               <a href={`https://www.instagram.com/${post.SocialIG}/`} target="_blank" rel="noopener noreferrer">
                 <img src="/images/profile/instagram.jpg" alt="Instagram" className="w-4 h-4 cursor-pointer" />
