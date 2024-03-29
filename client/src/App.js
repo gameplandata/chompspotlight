@@ -12,6 +12,7 @@ import { useAuthContext } from './Hooks/useAuthContext';
 import PrivateRoute from './PrivateRoute';
 import User from './Pages/User';
 import NewPostPage from './Pages/NewPostPage';
+import UpdateProfilePicPage from './Pages/Profile/UpdateProfilePicPage';
 
 function App() {
   const { user } = useAuthContext();
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to="/" />} />
           <Route path="/profile" element={<PrivateRoute element={<UserProfilePage />} />} />
           <Route path="/profile/edit" element={<PrivateRoute element={<EditProfilePage />} />} />
+          <Route path="/profile/picture" element={<PrivateRoute element={<UpdateProfilePicPage />} />} />
           <Route path="/post/new" element={<PrivateRoute element={<NewPostPage />} />} />
           <Route path="/search" element={<Search />} />
           <Route path="/feed" element={<Feed />} />
