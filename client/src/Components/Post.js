@@ -9,7 +9,7 @@ const Post = ({ post, showInteractions }) => {
     <div className="bg-white my-4 rounded-lg overflow-hidden shadow-xl max-w-[800px] mx-auto px-48 py-4"> 
       <div className="p-4">
         <div className="flex items-center mb-4 justify-start" style={{ marginLeft: '-180px' }}> 
-          <img src={post.DefaultProfilePic || "/images/profile/profilePic.jpg"} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
+          <img src={`${baseURL}/media/profilePictures/${post.DefaultProfilePic}`} alt="Profile" className="w-16 h-16 rounded-full object-cover" />
           <div className="ml-4 flex flex-col">
             <div className="font-semibold text-lg">{post.UserName || "Username"}</div>
             <div className="flex space-x-2 mt-1">
