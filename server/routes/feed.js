@@ -14,7 +14,10 @@ router.get('/', async (req, res) => {
             pm.Description AS caption,
             u.SocialIG AS instagram,
             u.SocialTikTok AS tiktok,
-            u.SocialX AS x
+            u.SocialX AS x,
+            u.FirstName AS firstname,
+            u.LastName AS lastname,
+            u.Email AS email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID
@@ -40,7 +43,10 @@ router.get('/athlete', async (req, res) => {
             pm.Description AS caption,
             u.SocialIG AS instagram,
             u.SocialTikTok AS tiktok,
-            u.SocialX AS x
+            u.SocialX AS x,
+            u.FirstName AS firstname,
+            u.LastName AS lastname,
+            u.Email AS email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID AND u.Type = 'athlete'
@@ -66,7 +72,10 @@ router.get('/sponsor', async (req, res) => {
             pm.Description AS caption,
             u.SocialIG AS instagram,
             u.SocialTikTok AS tiktok,
-            u.SocialX AS x
+            u.SocialX AS x,
+            u.FirstName AS firstname,
+            u.LastName AS lastname,
+            u.Email AS email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID AND u.Type = 'sponsor'

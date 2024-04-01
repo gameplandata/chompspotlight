@@ -30,7 +30,7 @@ function Feed() {
         <Header/>
       <div className="my-5 z-10">
         {posts.map((post) => (
-          <Post key={post.id} post={post} />
+          <Post key={post.id} post={post} showInteractions={true} />
         ))}
       </div>
       <Footer />
