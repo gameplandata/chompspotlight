@@ -12,6 +12,8 @@ import { useAuthContext } from './Hooks/useAuthContext';
 import PrivateRoute from './PrivateRoute';
 import User from './Pages/User';
 import NewPostPage from './Pages/NewPostPage';
+import AthleteFeed from './Pages/AthleteFeed';
+import SponsorFeed from './Pages/SponsorFeed';
 
 function App() {
   const { user } = useAuthContext();
@@ -29,6 +31,8 @@ function App() {
           <Route path="/post/new" element={<PrivateRoute element={<NewPostPage />} />} />
           <Route path="/search" element={<Search />} />
           <Route path="/feed" element={<Feed />} />
+          <Route path="/feed/athlete" element={<AthleteFeed />} />
+          <Route path="/feed/sponsor" element={<SponsorFeed />} />
           <Route path="/search/:searchText" exact element={<Search />} />
           <Route path="/user/" element={<Navigate to="/" />}></Route>
           <Route path="/user/:username" element={<User />} />
