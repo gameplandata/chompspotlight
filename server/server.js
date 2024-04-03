@@ -18,6 +18,7 @@ const loginRoute = require('./routes/login');
 const profileRoute = require('./routes/profile');
 const userRoute = require('./routes/user');
 const feedRoute = require('./routes/feed');
+const followRoute = require('./routes/follow');
 
 // Use Routes
 app.use('/', homeRoute);
@@ -27,6 +28,8 @@ app.use('/login', loginRoute);
 app.use('/profile', profileRoute);
 app.use('/user', userRoute);
 app.use('/feed', feedRoute);
+app.use('/follow', followRoute);
+
 // Starts Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
