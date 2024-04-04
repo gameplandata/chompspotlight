@@ -59,6 +59,10 @@ const EditProfilePage = () => {
     setEditMode(false);
   };
 
+  const goToProfilePicture = () => {
+    navigate('/profile/picture')
+  }
+
   return (
     <div className="flex items-center justify-center p-12">
       {/* Back to Profile Button */}
@@ -125,12 +129,6 @@ const EditProfilePage = () => {
             <input type="text" id="x" name="SocialX" value={formDetails.SocialX} onChange={handleChange} placeholder="X" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
           </div>
 
-          {/* Profile Picture */}
-          <div className="mb-5">
-            <label htmlFor="profilePic" className="mb-3 block text-base font-medium">Edit Profile Picture</label>
-            <input type="text" id="profilePic" name="profilePicture" value={formDetails.DefaultProfilePic} onChange={handleChange} placeholder="Profile Picture" className={`w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-3 text-base font-medium text-gray-700 outline-none focus:border-black ${editMode ? "" : "cursor-not-allowed"}`} disabled={!editMode} />
-          </div>
-
           {/* Edit and Save/Cancel Buttons */}
           {!editMode ? (
             <div className="flex items-center justify-center mt-4">
@@ -142,6 +140,12 @@ const EditProfilePage = () => {
               <button type="button" id="cancel" onClick={handleCancel} class="hover:shadow-form w-32 rounded-md bg-gray-100 py-2 px-8 text-center text-base font-semibold text-black border border-gray-400 hover:bg-gray-200">Cancel</button>
             </div>
           )}
+
+          {/* Profile Picture */}
+          <div className="mb-5">
+            <label htmlFor="profilePic" className="mb-3 block text-base font-medium">Edit Profile Picture</label>
+            <button type="button" onClick={goToProfilePicture} class="hover:shadow-form w-32 rounded-md bg-gray-100 py-2 px-8 text-center text-base font-semibold text-black border border-gray-400 hover:bg-gray-200">Edit</button>
+          </div>
         </form>
       </div>
     </div>

@@ -7,24 +7,25 @@ router.get('/', async (req, res) => {
     try {
         const sql = `
         SELECT
-            up.PostID AS id,
-            u.UserName AS username,
-            u.DefaultProfilePic AS profilePicture,
-            pm.MediaURL AS url,
-            pm.Description AS caption,
-            u.SocialIG AS instagram,
-            u.SocialTikTok AS tiktok,
-            u.SocialX AS x,
-            u.FirstName AS firstname,
-            u.LastName AS lastname,
-            u.Email AS email
+            up.PostID,
+            u.UserName,
+            u.DefaultProfilePic,
+            pm.MediaURL,
+            pm.Description,
+            u.SocialIG,
+            u.SocialTikTok,
+            u.SocialX,
+            u.FirstName,
+            u.LastName,
+            u.Email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID
         JOIN PostMedia pm ON up.PostID = pm.PostID
-        ORDER BY id DESC
+        ORDER BY up.PostID DESC
         `
         const rows = await query(sql);
+        console.log(rows);
         res.json(rows);
     } catch (err) {
         console.error('Database query error:', err);
@@ -36,22 +37,22 @@ router.get('/athlete', async (req, res) => {
     try {
         const sql = `
         SELECT
-            up.PostID AS id,
-            u.UserName AS username,
-            u.DefaultProfilePic AS profilePicture,
-            pm.MediaURL AS url,
-            pm.Description AS caption,
-            u.SocialIG AS instagram,
-            u.SocialTikTok AS tiktok,
-            u.SocialX AS x,
-            u.FirstName AS firstname,
-            u.LastName AS lastname,
-            u.Email AS email
+            up.PostID,
+            u.UserName,
+            u.DefaultProfilePic,
+            pm.MediaURL,
+            pm.Description,
+            u.SocialIG,
+            u.SocialTikTok,
+            u.SocialX,
+            u.FirstName,
+            u.LastName,
+            u.Email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID AND u.Type = 'athlete'
         JOIN PostMedia pm ON up.PostID = pm.PostID
-        ORDER BY id DESC
+        ORDER BY up.PostID DESC
         `
         const rows = await query(sql);
         res.json(rows);
@@ -65,22 +66,22 @@ router.get('/sponsor', async (req, res) => {
     try {
         const sql = `
         SELECT
-            up.PostID AS id,
-            u.UserName AS username,
-            u.DefaultProfilePic AS profilePicture,
-            pm.MediaURL AS url,
-            pm.Description AS caption,
-            u.SocialIG AS instagram,
-            u.SocialTikTok AS tiktok,
-            u.SocialX AS x,
-            u.FirstName AS firstname,
-            u.LastName AS lastname,
-            u.Email AS email
+            up.PostID,
+            u.UserName,
+            u.DefaultProfilePic,
+            pm.MediaURL,
+            pm.Description,
+            u.SocialIG,
+            u.SocialTikTok,
+            u.SocialX,
+            u.FirstName,
+            u.LastName,
+            u.Email
         FROM
             UserPosts up
         JOIN Users u ON up.UserID = u.UserID AND u.Type = 'sponsor'
         JOIN PostMedia pm ON up.PostID = pm.PostID
-        ORDER BY id DESC
+        ORDER BY up.PostID DESC
         `
         const rows = await query(sql);
         res.json(rows);

@@ -55,6 +55,21 @@ const UserProfilePage = () => {
     fetchUserPosts();
   }, [user]);
 
+  const deletePost = async (postId) => {
+    try {
+      await axiosInstance.delete(`/profile/posts/${postId}`);
+      
+      const updatedPosts = userPosts.filter(post => post.PostID !== postId);
+      setUserPosts(updatedPosts);
+      
+      setActivePost(null);
+      
+    } catch (error) {
+      console.error("Failed to delete post", error);
+      alert("Failed to delete the post. Please try again.");
+    }
+  };  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -104,7 +119,7 @@ const UserProfilePage = () => {
           {/* <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full">Follow</button> */}
           
           <div className="w-52 h-52">
-            <img src={userProfile.DefaultProfilePic} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
+            <img src={`${baseURL}/media/profilePictures/${userProfile.DefaultProfilePic}`} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
           </div>
   
           {/* <button className="bg-gray-300 text-black font-bold py-2 px-12 rounded-full">Message</button> */}
@@ -143,7 +158,7 @@ const UserProfilePage = () => {
           ))}
         </div>
       </div>
-        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onClose={closePostModal} />}
+        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onDelete={() => deletePost(activePost.PostID)} onClose={closePostModal} />}
       </div>
       <Footer/>
     </div>
