@@ -4,11 +4,12 @@ import { useState } from 'react';
 
 const Footer = () => {
 
-    const [showModal, setShowModal] = React.useState(false);
+    const [showPrivacyPolicy, setPrivacyPolicy] = React.useState(false);
+    const [showTermsOfService, setTermsOfService] = React.useState(false);
 
     return (
         <>
-            {showModal ? (
+            {showPrivacyPolicy ? (
                 <div className="fixed inset-0 z-50 flex justify-center items-center p-4">
                     <div className="bg-white p-4 rounded-lg max-w-[95%] max-h-[95%] overflow-auto shadow-xl relative flex flex-col items-center">
                         <h1 className="text-2xl font-semibold">Privacy Policy</h1>
@@ -57,15 +58,66 @@ const Footer = () => {
 
                             <p>By using our website, you consent to the collection and use of your information as described in this Privacy Policy.</p>
                         </body>
-                        <button className="mt-4 text-xl border-black border-2 px-2 py-1 rounded-md cursor-pointer" onClick={() => setShowModal(false)}>Close</button>
+                        <button className="mt-4 text-xl border-black border-2 px-2 py-1 rounded-md cursor-pointer" onClick={() => setPrivacyPolicy(false)}>Close</button>
+                    </div>
+                </div>
+            ) : null}
+            {showTermsOfService ? (
+                <div className="fixed inset-0 z-50 flex justify-center items-center p-4">
+                    <div className="bg-white p-4 rounded-lg max-w-[95%] max-h-[95%] overflow-auto shadow-xl relative flex flex-col items-center">
+                        <h1 className="text-2xl font-semibold">Terms Of Service</h1>
+                        <body className='text-xl text-left'>
+                            <h1>Terms of Service for Chomp Spotlight Social Media Recruiting Website</h1>
+                            <p>Effective Date: 4/4/24</p>
+                            <p>Welcome to Chomp Spotlight ("Chomp Spotlight", "we", "us", "our"). By accessing or using our social media recruiting website, you agree to comply with and be bound by these Terms of Service. Please read these terms carefully before using our website.</p>
+
+                            <h2>1. Use of Our Website</h2>
+                            <p>You must be at least 18 years old to use our website. By using our website, you represent and warrant that you are at least 18 years old.</p>
+
+                            <h2>2. User Accounts</h2>
+                            <p>You may be required to create an account to access certain features of our website. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+
+                            <h2>3. User Content</h2>
+                            <p>By posting, uploading, or submitting any content on our website, you grant Chomp Spotlight a non-exclusive, transferable, sublicensable, royalty-free, worldwide license to use, reproduce, modify, adapt, publish, translate, distribute, and display such content.</p>
+
+                            <h2>4. Prohibited Activities</h2>
+                            <p>You agree not to engage in any of the following prohibited activities:
+                                <ul>
+                                    <li>Violating any laws or regulations.</li>
+                                    <li>Interfering with or disrupting our website or servers.</li>
+                                    <li>Impersonating another person or entity.</li>
+                                    <li>Harassing, intimidating, or threatening other users.</li>
+                                    <li>Posting or transmitting unauthorized commercial communications.</li>
+                                    <li>Uploading viruses or other malicious code.</li>
+                                </ul>
+                            </p>
+
+                            <h2>5. Intellectual Property</h2>
+                            <p>All content and materials available on our website, including but not limited to text, graphics, logos, button icons, images, audio clips, and software, are the property of Chomp Spotlight or its licensors and are protected by United States and international copyright, trademark, and other intellectual property laws.</p>
+
+                            <h2>6. Limitation of Liability</h2>
+                            <p>In no event shall Chomp Spotlight or its affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or in connection with your use of our website.</p>
+
+                            <h2>7. Governing Law</h2>
+                            <p>These Terms of Service shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict of law principles.</p>
+
+                            <h2>8. Changes to These Terms</h2>
+                            <p>We reserve the right to update or modify these Terms of Service at any time without prior notice. Your continued use of our website after any changes indicates your acceptance of the updated terms.</p>
+
+                            <h2>9. Contact Us</h2>
+                            <p>If you have any questions or concerns about these Terms of Service, please contact us at chompspotlight@gmail.com.</p>
+
+                            <p>By using our website, you agree to these Terms of Service.</p>
+                        </body>
+                        <button className="mt-4 text-xl border-black border-2 px-2 py-1 rounded-md cursor-pointer" onClick={() => setTermsOfService(false)}>Close</button>
                     </div>
                 </div>
             ) : null}
 
             <footer className="bg-slate-100 w-full h-[10vh] absolute left-0 bottom-0 flex items-center justify-center text-base" >
                 <p className="px-[2%]">&copy; 2024 Chomp Spotlight</p>
-                <p className="px-[2%] cursor-pointer hover:text-blue-500 hover:underline" onClick={() => setShowModal(true)}> Privacy Policy</p>
-                <p className="px-[2%]">Terms of Service</p>
+                <p className="px-[2%] cursor-pointer hover:text-blue-500 hover:underline" onClick={() => setPrivacyPolicy(true)}> Privacy Policy</p>
+                <p className="px-[2%] cursor-pointer hover:text-blue-500 hover:underline" onClick={() => setTermsOfService(true)}>Terms of Service</p>
             </footer>
         </>
     );
