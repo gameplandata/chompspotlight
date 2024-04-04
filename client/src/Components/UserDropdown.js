@@ -28,6 +28,10 @@ const UserDropdown = () => {
     const goToEditProfilePage = () => {
         navigate("/profile/edit");
     }
+    
+    const goToMakePostPage = () => {
+        navigate("/post/new");
+    }
 
     const handleLogout = () => {
         logout();
@@ -51,6 +55,12 @@ const UserDropdown = () => {
                         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
                             <li>
                                 <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    onClick={goToMakePostPage}>
+                                    Make a Post
+                                </span>
+                            </li>
+                            <li>
+                                <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     onClick={goToProfilePage}>
                                     Profile
                                 </span>
@@ -61,6 +71,7 @@ const UserDropdown = () => {
                                     Account Settings
                                 </span>
                             </li>
+                            
                         </ul>
                         <div className="py-2">
                             <span className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
