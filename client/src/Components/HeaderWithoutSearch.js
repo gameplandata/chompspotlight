@@ -74,11 +74,11 @@ const Header = () => {
                 <div
                     className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
                     onClick={goToAthleteFeed}
-                >Athletes</div>
+                >Athlete Feed</div>
                 <div
                     className="relative leading-[1.33rem] cursor-pointer hover:border hover:border-transparent hover:hover:border-black rounded-md p-2 transition-all"
                     onClick={goToSponsorFeed}
-                >Sponsors</div>
+                >Sponsor Feed</div>
                 <UserDropdown />
             </div>
         </div>
