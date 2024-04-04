@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from "../../Components/HeaderWithoutSearch"
 import Footer from "../../Components/Footer"
 import PostModal from './PostModal';
@@ -7,8 +8,11 @@ import { useAuthContext } from '../../Hooks/useAuthContext';
 import axiosInstance from '../../axiosConfig';
 import FollowModal from '../../Components/FollowModal';
 import { useFollow } from "../../Hooks/useFollow"
+import FollowModal from '../../Components/FollowModal';
+import { useFollow } from "../../Hooks/useFollow"
 
 const UserProfilePage = () => {
+  const baseURL = "http://localhost:3001";
   const baseURL = "http://localhost:3001";
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,6 +33,9 @@ const UserProfilePage = () => {
   const [showFollowModal, setShowFollowModal] = useState(false);
   const [tab, setTab] = useState("following");
   const { follow, unfollow, error, isLoading1, isFollowing, isFollowingUser, getFollowingCount, getFollowerCount, followingCount, followerCount } = useFollow();
+  const [showFollowModal, setShowFollowModal] = useState(false);
+  const [tab, setTab] = useState("following");
+  const { follow, unfollow, error, isLoading1, isFollowing, isFollowingUser, getFollowingCount, getFollowerCount, followingCount, followerCount } = useFollow();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -36,6 +43,9 @@ const UserProfilePage = () => {
         try {
           const response = await axiosInstance.get(`/profile/fetch/${user.userID}`);
           setUserProfile({ ...response.data, posts: response.data.posts || [] });
+
+          await getFollowingCount(user.userID);
+          await getFollowerCount(user.userID);
 
           await getFollowingCount(user.userID);
           await getFollowerCount(user.userID);
@@ -54,7 +64,9 @@ const UserProfilePage = () => {
         try {
           const response = await axiosInstance.get(`/profile/user/${user.userID}/posts`);
           setUserPosts(response.data);
+          setUserPosts(response.data);
         } catch (error) {
+          console.error("Error fetching user posts:", error);
           console.error("Error fetching user posts:", error);
         }
       }
