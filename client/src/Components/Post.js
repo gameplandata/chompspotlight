@@ -19,8 +19,8 @@ const Post = ({ post, showInteractions }) => {
           <div className="bg-white p-4 rounded-lg max-w-[95%] max-h-[95%] overflow-auto shadow-xl relative flex flex-col items-center">
             <h1 className="text-2xl font-semibold">Contact Information</h1>
             <div className = "flex flex-col items-start">
-            <h2 className="text-xl font-semibold">Name: {capitalizeFirstLetter(post.firstname)} {capitalizeFirstLetter(post.lastname)}</h2>
-            <h2 className="text-xl font-semibold">Email: {post.email}</h2>
+            <h2 className="text-xl font-semibold">Name: {capitalizeFirstLetter(post.FirstName)} {capitalizeFirstLetter(post.LastName)}</h2>
+            <h2 className="text-xl font-semibold">Email: {post.Email}</h2>
             </div>
             <button className="mt-4 text-xl border-black border-2 px-2 py-1 rounded-md cursor-pointer" onClick={() => setShowModal(false)}>Close</button>
           </div>
