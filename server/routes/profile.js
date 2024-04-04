@@ -136,8 +136,6 @@ router.post('/picture/:id', authenticateToken, upload.single('media'), async (re
 
           const MediaURL = `${filename}`; 
 
-          console.log(MediaURL);
-
           const storePFP = `
             UPDATE Users
             SET DefaultProfilePic = ?

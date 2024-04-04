@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import Header from "../../Components/HeaderWithoutSearch"
 import Footer from "../../Components/Footer"
 import PostModal from './PostModal';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 import axiosInstance from '../../axiosConfig';
+import FollowModal from '../../Components/FollowModal';
+import { useFollow } from "../../Hooks/useFollow"
 
 const UserProfilePage = () => {
-  const baseURL = "http://localhost:3001"; 
+  const baseURL = "http://localhost:3001";
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activePost, setActivePost] = useState(null);
@@ -24,6 +26,9 @@ const UserProfilePage = () => {
     SocialX: '',
     DefaultProfilePic: ''
   });
+  const [showFollowModal, setShowFollowModal] = useState(false);
+  const [tab, setTab] = useState("following");
+  const { follow, unfollow, error, isLoading1, isFollowing, isFollowingUser, getFollowingCount, getFollowerCount, followingCount, followerCount } = useFollow();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -31,6 +36,9 @@ const UserProfilePage = () => {
         try {
           const response = await axiosInstance.get(`/profile/fetch/${user.userID}`);
           setUserProfile({ ...response.data, posts: response.data.posts || [] });
+
+          await getFollowingCount(user.userID);
+          await getFollowerCount(user.userID);
         } catch (error) {
           console.error("Error fetching user info:", error.response ? error.response.data : error.message);
         }
@@ -45,9 +53,9 @@ const UserProfilePage = () => {
       if (user && user.userID) {
         try {
           const response = await axiosInstance.get(`/profile/user/${user.userID}/posts`);
-          setUserPosts(response.data); 
+          setUserPosts(response.data);
         } catch (error) {
-            console.error("Error fetching user posts:", error);
+          console.error("Error fetching user posts:", error);
         }
       }
     };
@@ -90,45 +98,57 @@ const UserProfilePage = () => {
     setActivePost(null);
   };
 
+  const openFollowModal = (ftab) => {
+    setShowFollowModal(true);
+    setTab(ftab)
+  };
+
+  const closeFollowModal = () => {
+    setShowFollowModal(false);
+  };
+
   return (
     <div className="relative bg-white pb-[10vh] min-h-screen">
-      <Header/>
+      <Header />
       <div className="h-20"></div>
       <div className="container mx-auto p-4">
         <div className="flex justify-end pr-80">
           <div className="nav-toggle cursor-pointer text-xl px-2 py-1 border rounded-lg bg-white text-gray-700 shadow-sm hover:bg-gray-300" onClick={toggleSidebar}>☰</div>
-            {isSidebarOpen && (
-              <aside className="fixed top-0 right-0 w-64 bg-white shadow-xl h-full z-50 transform transition-transform duration-300 ease-in-out">
-                <div className="flex justify-between items-center border-b p-4">
-                  <span className="text-lg font-semibold">Chomp Spotlight</span>
-                  <button onClick={toggleSidebar} className="close-sidebar text-lg px-3 py-1 rounded-full hover:bg-gray-200">🗙</button>
-                </div>
-                <ul className="flex flex-col p-4">
-                  <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToEditProfile}>Edit Profile</li>
-                  <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToNewPost}>New Post</li>
-                </ul>
-              </aside>
-            )}
-          </div>
+          {isSidebarOpen && (
+            <aside className="fixed top-0 right-0 w-64 bg-white shadow-xl h-full z-50 transform transition-transform duration-300 ease-in-out">
+              <div className="flex justify-between items-center border-b p-4">
+                <span className="text-lg font-semibold">Chomp Spotlight</span>
+                <button onClick={toggleSidebar} className="close-sidebar text-lg px-3 py-1 rounded-full hover:bg-gray-200">🗙</button>
+              </div>
+              <ul className="flex flex-col p-4">
+                <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToEditProfile}>Edit Profile</li>
+                <li className="py-2 px-4 text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={goToNewPost}>New Post</li>
+              </ul>
+            </aside>
+          )}
+        </div>
 
         <div className="text-center mt-4 mb-7">
           <span className="text-lg font-bold">{userProfile.UserName}</span>
         </div>
-  
+
         <div className="flex flex-col items-center justify-center space-y-4 md:space-y-0 md:flex-row md:space-x-28">
-          {/* <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full">Follow</button> */}
-          
+          <button className="bg-blue-500 text-white font-bold py-2 px-14 rounded-full invisible">Follow</button>
           <div className="w-52 h-52">
             <img src={`${baseURL}/media/profilePictures/${userProfile.DefaultProfilePic}`} alt="Profile" className="rounded-full border-2 border-gray-300 object-cover w-full h-full"/>
           </div>
-  
-          {/* <button className="bg-gray-300 text-black font-bold py-2 px-12 rounded-full">Message</button> */}
+
+          <div>
+            <button className="bg-slate-500 text-white font-bold py-2 w-40 rounded-full my-1" onClick={() => openFollowModal("following")}>{followingCount} Following</button><br />
+            <button className="bg-slate-500 text-white font-bold py-2 w-40 rounded-full my-1" onClick={() => openFollowModal("followers")}>{followerCount} Followers</button>
+            {showFollowModal && <FollowModal userId={user.userID} onClose={closeFollowModal} initialTab={tab} />}
+          </div>
         </div>
-        
+
         <div className="text-center mt-4">
           <span className="text-lg font-bold">{userProfile.FirstName} {userProfile.LastName}</span>
         </div>
-  
+
         <div className="grid grid-cols-3 divide-x divide-gray-300 w-full max-w-4xl mx-auto mt-4">
           <div className="text-center">
             <a href={`https://www.instagram.com/${userProfile.SocialIG}/`} target="_blank" rel="noopener noreferrer">
@@ -148,19 +168,19 @@ const UserProfilePage = () => {
             </a>
           </div>
         </div>
-  
-      <div className="mt-8 flex justify-center">
-        <div className="grid grid-cols-3 gap-2 md:gap-1 mx-auto"> 
-          {userPosts.map((post, index) => (
-            <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto" onClick={() => handlePostClick(post)}> 
-              <img src={`${baseURL}/media/${post.MediaURL}`} alt={`Post ${index}`} className="object-cover w-full h-full cursor-pointer"/>
-            </div>
-          ))}
+
+        <div className="mt-8 flex justify-center">
+          <div className="grid grid-cols-3 gap-2 md:gap-1 mx-auto">
+            {userPosts.map((post, index) => (
+              <div key={index} className="aspect-square w-72 h-72 flex justify-center items-center mx-auto" onClick={() => handlePostClick(post)}>
+                <img src={`${baseURL}/media/${post.MediaURL}`} alt={`Post ${index}`} className="object-cover w-full h-full cursor-pointer" />
+              </div>
+            ))}
+          </div>
         </div>
+        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onClose={closePostModal} />}
       </div>
-        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onDelete={() => deletePost(activePost.PostID)} onClose={closePostModal} />}
-      </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

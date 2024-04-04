@@ -17,10 +17,10 @@ router.post('/follow/:id', authenticateToken, async (req, res) => {
         const followUser = await query(sql);
 
         if (followUser.affectedRows == 1) {
-            res.status(200);
+            res.status(200).json({success: true});;
         } else {
             // user already follows
-            res.status(400);
+            res.status(400).json({error: "Database unmodified"})
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
@@ -38,12 +38,12 @@ router.post('/unfollow/:id', authenticateToken, async (req, res) => {
     try {
         const sql = `DELETE FROM Follows WHERE SourceID = ${source} AND TargetID = ${target};`
         const unfollowUser = await query(sql);
-
+        
         if (unfollowUser.affectedRows == 1) {
-            res.status(200);
+            res.status(200).json({success: true});
         } else {
             // user wasn't already following
-            res.status(400);
+            res.status(400).json({error: "Database unmodified"})
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
@@ -83,7 +83,7 @@ router.get('/followCount/:id', async (req, res) => {
         if (followCount && followCount[0]) {
             res.status(200).json({ followCount: followCount[0]['COUNT(*)'] });
         } else {
-            res.status(400);
+            res.status(400).json({error: "Unable to get following count"});
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
@@ -101,7 +101,7 @@ router.get('/followerCount/:id', async (req, res) => {
         if (followerCount && followerCount[0]) {
             res.status(200).json({ followerCount: followerCount[0]['COUNT(*)'] });
         } else {
-            res.status(400);
+            res.status(400).json({error: "Unable to get follower count"});
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
@@ -113,13 +113,13 @@ router.get('/followings/:id', async (req, res) => {
     const userId = req.params.id;
 
     try {
-        const sql = `SELECT Users.UserID, Users.FirstName, Users.LastName, Users.UserName FROM Follows INNER JOIN Users ON Follows.TargetID = Users.UserID WHERE Follows.SourceID = ${userId}`;
+        const sql = `SELECT Users.UserID, Users.FirstName, Users.LastName, Users.UserName, Users.DefaultProfilePic FROM Follows INNER JOIN Users ON Follows.TargetID = Users.UserID WHERE Follows.SourceID = ${userId}`;
         const followings = await query(sql);
 
         if (followings) {
             res.status(200).json({ followings });
         } else {
-            res.status(400);
+            res.status(400).json({error: "Unable to get followings"});
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
@@ -127,18 +127,17 @@ router.get('/followings/:id', async (req, res) => {
 });
 
 //Endpoint to get list of followers
-//Endpoint to get list of following
 router.get('/followers/:id', async (req, res) => {
     const userId = req.params.id;
 
     try {
-        const sql = `SELECT Users.UserID, Users.FirstName, Users.LastName, Users.UserName FROM Follows INNER JOIN Users ON Follows.SourceID = Users.UserID WHERE Follows.TargetID = ${userId}`;
+        const sql = `SELECT Users.UserID, Users.FirstName, Users.LastName, Users.UserName, Users.DefaultProfilePic FROM Follows INNER JOIN Users ON Follows.SourceID = Users.UserID WHERE Follows.TargetID = ${userId}`;
         const followers = await query(sql);
 
         if (followers) {
             res.status(200).json({ followers });
         } else {
-            res.status(400);
+            res.status(400).json({error: "Unable to get followers"});
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
