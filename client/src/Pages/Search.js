@@ -69,7 +69,7 @@ export default function Search() {
               matchesFilter(user) && (
                 <Link to={"/user/" + (user.UserName || "")} key={index} className="flex flex-col items-end w-64">
                   <div className="relative">
-                    <img src={"/images/profile/" + user.DefaultProfilePic} alt={user.FirstName + " " + user.LastName} className="w-full h-64 object-cover rounded" />
+                    <img src={"http://localhost:3001/media/profilePictures/" + user.DefaultProfilePic} alt={user.FirstName + " " + user.LastName} className="w-full h-64 object-cover rounded" />
                     <div className="absolute bottom-0 left-0 right-0 bg-gray-200 px-4 py-2 rounded-b">
                       <div className="flex justify-center">
                         {user.FirstName + " " + user.LastName}
