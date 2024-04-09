@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
         ORDER BY up.PostID DESC
         `
         const rows = await query(sql);
-        console.log(rows);
         res.json(rows);
     } catch (err) {
         console.error('Database query error:', err);
