@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Get method to query the users 
 router.post('/', async (req, res) => {
-    const safePattern = new RegExp("^[a-zA-Z0-9 .-]+$");
+    const safePattern = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ \\-']+$");
     console.log(req.body);
     const searchText = req.body.value;
     if (!safePattern.test(searchText) || !searchText) {
