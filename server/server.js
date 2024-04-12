@@ -19,6 +19,7 @@ const profileRoute = require('./routes/profile');
 const userRoute = require('./routes/user');
 const feedRoute = require('./routes/feed');
 const followRoute = require('./routes/follow');
+const searchRoute = require('./routes/search');
 
 // Use Routes
 app.use('/', homeRoute);
@@ -29,6 +30,7 @@ app.use('/profile', profileRoute);
 app.use('/user', userRoute);
 app.use('/feed', feedRoute);
 app.use('/follow', followRoute);
+app.use('/search', searchRoute);
 
 // Starts Server
 app.listen(PORT, () => {
