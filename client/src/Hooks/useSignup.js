@@ -7,11 +7,11 @@ export const useSignup = () => {
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
 
-    const signup = async (firstName, lastName, email, username, password, retypedPassword, type) => {
+    const signup = async (firstName, lastName, email, username, password, retypedPassword, type, sport) => {
         setIsLoading(true)
         setError(null)
 
-        axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: type})
+        axios.post('http://localhost:3001/signup', { firstName: firstName, lastName: lastName, email: email, username: username, password: password, retypedPassword: retypedPassword, type: type, sport: sport })
         .then(response => {
             localStorage.setItem('user', JSON.stringify(response.data));
             dispatch({type: 'LOGIN', payload: response.data})

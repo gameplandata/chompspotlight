@@ -12,7 +12,7 @@ const router = express.Router();
 const usernamePattern = /^[a-zA-Z_\-.\d]*$/;
 
 router.post('/', async (req, res) => {
-    const { firstName, lastName, email, username, password, retypedPassword, type } = req.body;
+    const { firstName, lastName, email, username, password, retypedPassword, type, sport } = req.body;
 
     try {
         //Validate user input
@@ -23,6 +23,9 @@ router.post('/', async (req, res) => {
             res.status(400).json(error)
         } else {
             const rows = await addUser(firstName, lastName, email, username, password, type)
+            if (!insertSport(rows.insertId, sport)){
+                throw Error('Failed to register sport');
+            }
             const token = createToken(rows.insertId)
 
             // adjust user information sent to frontend if necessary, make sure to adjust this in login.js as well to match
@@ -111,6 +114,15 @@ async function doesUsernameExist(username) {
         return rows.length != 0;
     } catch (err) {
         throw Error('Database Error')
+    }
+}
+
+async function insertSport(UserID, Sport) {
+    try {
+        const rows = await db.query(`INSERT INTO Sports (userID, sport) VALUES ('${UserID}', '${Sport}');`);
+        return rows.length != 0;
+    } catch (err) {
+        throw Error('Database Error');
     }
 }
 

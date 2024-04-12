@@ -11,10 +11,11 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [retypedPassword, setRetypedPassword] = useState('');
   const [type, setType] = useState('');
+  const [sport, setSport] = useState('');
   const {signup, error, isLoading} = useSignup();
 
   const handleSignup = async () => {
-      await signup(firstName, lastName, email, username, password, retypedPassword, type);
+      await signup(firstName, lastName, email, username, password, retypedPassword, type, sport);
   };
 
   return (
@@ -120,7 +121,7 @@ const SignupPage = () => {
             <span className="text-sm text-red-500">*{error.retypedPassword}</span>
           }
           <br />
-          <span>I am a...</span>
+          <span>I am a(n)...</span>
           <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white" onChange={(e) => setType(e.target.value)}>
             <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <div className="flex items-center ps-3">
@@ -139,6 +140,35 @@ const SignupPage = () => {
             <span className="text-sm text-red-500">*{error.type}</span>
           }
           <br />
+          {type === 'athlete' && (
+            <>
+              <span>Sport:</span>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value={sport}
+                onChange={(e) => setSport(e.target.value)}
+              >
+                <option value="">Select Sport</option>
+                <option value="Football">Football</option>
+                <option value="Basketball">Basketball</option>
+                <option value="Baseball">Baseball</option>
+                <option value="Softball">Softball</option>
+                <option value="Soccer">Soccer</option>
+                <option value="Volleyball">Volleyball</option>
+                <option value="Track and Field">Track and Field</option>
+                <option value="Swimming">Swimming</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Golf">Golf</option>
+                <option value="Wrestling">Wrestling</option>
+                <option value="Hockey">Hockey</option>
+                <option value="Lacrosse">Lacrosse</option>
+              </select>
+              {error && error.sport && 
+                <span className="text-sm text-red-500">*{error.sport}</span>
+              }
+              <br />
+            </>
+          )}
           <div className="flex flex-col justify-center items-center">
             <button
               className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2"
