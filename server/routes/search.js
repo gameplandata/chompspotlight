@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
             res.json(sorted);
         } else if (fullName.length > 1) {
             var lastName = fullName[1];
-            const rows = await db.query('select Users.UserID as UserID, Users.UserName as UserName, Users.FirstName as FirstName, Users.LastName as LastName, Users.DefaultProfilePic as DefaultProfilePic, Sports.sport as Sport from Users INNER JOIN Sports on Users.UserID=Sports.userID where FirstName LIKE \'%' + firstName + '%\' and LastName LIKE \'%' + lastName + '%\' ORDER BY UserID ASC');
+            const rows = await db.query('select Users.UserID as UserID, Users.UserName as UserName, Users.FirstName as FirstName, Users.LastName as LastName, Users.DefaultProfilePic as DefaultProfilePic, Sports.sport as Sport from Users INNER JOIN Sports on Users.UserID=Sports.userID where FirstName LIKE "%' + firstName + '%" and LastName LIKE "%' + lastName + '%" ORDER BY UserID ASC');
             const aggregatedData = {};
 
             // Iterate over the query result and aggregate the data
