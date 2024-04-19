@@ -189,20 +189,20 @@ const HomePage = () => {
 
             <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start text-left border-[1px] border-solid border-gray-200">
               <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
-                <div className="self-stretch flex-1 relative bg-[url('/public/image@3x.png')] bg-contain bg-no-repeat bg-center">
+                <div className="self-stretch flex-1 relative bg-[url('/public/133.png')] bg-contain bg-no-repeat bg-center">
                   <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
                     <div className="relative leading-[0.89rem] font-medium">
-                      Basketball
+                      Tennis
                     </div>
                   </div>
                 </div>
               </div>
               <div className="self-stretch flex flex-col items-start justify-start p-[0.67rem] gap-[0.22rem] text-[0.89rem]">
                 <div className="self-stretch relative leading-[1.33rem]">
-                  Aliyah Matharu
+                  Katherine Walter
                 </div>
                 <div className="self-stretch relative text-[1.11rem] leading-[1.56rem] font-medium inline-block overflow-hidden text-ellipsis whitespace-nowrap h-[1.56rem] shrink-0">
-                  Leading Scorer Averaging 18.3 ppg
+                  3x Tournament Champion
                 </div>
                 <div className="self-stretch flex flex-row items-center justify-start gap-[0.44rem] text-center">
                   <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
@@ -217,39 +217,9 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200">
+            <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200" >
               <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
-                <div className="self-stretch flex-1 relative bg-[url('/public/natalie.jpg')] bg-contain bg-no-repeat bg-center">
-                  <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
-                    <div className="relative leading-[0.89rem] font-medium">
-                      Softball
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="self-stretch flex flex-col items-start justify-start p-[0.67rem] gap-[0.22rem] text-left text-[0.89rem]">
-                <div className="self-stretch relative leading-[1.33rem]">
-                  Natalie Lugo
-                </div>
-                <div className="self-stretch relative text-[1.11rem] leading-[1.56rem] font-medium inline-block overflow-hidden text-ellipsis whitespace-nowrap h-[1.56rem] shrink-0">
-                  2021 SEC Pitcher of the Week
-                </div>
-                <div className="self-stretch flex flex-row items-center justify-start gap-[0.44rem] text-center">
-                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
-                    💰
-                  </div>
-                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
-                    ❤️
-                  </div>
-                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
-                    📍
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200">
-              <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
-                <div className="self-stretch flex-1 relative bg-[url('/public/megan.jpg')] bg-contain bg-no-repeat bg-center">
+                <div className="self-stretch flex-1 relative bg-[url('/public/134.jpg')] bg-contain bg-no-repeat bg-center">
                   <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
                     <div className="relative leading-[0.89rem] font-medium">
                       Soccer
@@ -259,7 +229,37 @@ const HomePage = () => {
               </div>
               <div className="self-stretch flex flex-col items-start justify-start p-[0.67rem] gap-[0.22rem] text-left text-[0.89rem]">
                 <div className="self-stretch relative leading-[1.33rem]">
-                  Megan Hinnenkamp
+                  Sara Evans
+                </div>
+                <div className="self-stretch relative text-[1.11rem] leading-[1.56rem] font-medium inline-block overflow-hidden text-ellipsis whitespace-nowrap h-[1.56rem] shrink-0">
+                  2023 SEC goal leader 
+                </div>
+                <div className="self-stretch flex flex-row items-center justify-start gap-[0.44rem] text-center">
+                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
+                    💰
+                  </div>
+                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
+                    ❤️
+                  </div>
+                  <div className="relative leading-[1.33rem] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap w-[1.33rem] h-[1.33rem] shrink-0">
+                    📍
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 rounded-md overflow-hidden flex flex-col items-center justify-start border-[1px] border-solid border-gray-200">
+              <div className="self-stretch h-[18.89rem] overflow-hidden shrink-0 flex flex-row items-start justify-start">
+                <div className="self-stretch flex-1 relative bg-[url('/public/136.webp')] bg-contain bg-no-repeat bg-center">
+                  <div className="absolute top-[0rem] left-[0rem] rounded-tl-md rounded-tr-none rounded-br-md rounded-bl-none bg-gray-300 flex flex-col items-center justify-center py-[0.22rem] px-[0.44rem] text-left">
+                    <div className="relative leading-[0.89rem] font-medium">
+                      Basketball
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch flex flex-col items-start justify-start p-[0.67rem] gap-[0.22rem] text-left text-[0.89rem]">
+                <div className="self-stretch relative leading-[1.33rem]">
+                  Emma Eckhart
                 </div>
                 <div className="self-stretch relative text-[1.11rem] leading-[1.56rem] font-medium inline-block overflow-hidden text-ellipsis whitespace-nowrap h-[1.56rem] shrink-0">
                   2023 All-SEC Second Team
