@@ -178,7 +178,7 @@ const UserProfilePage = () => {
             ))}
           </div>
         </div>
-        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onClose={closePostModal} />}
+        {activePost && <PostModal post={activePost} showInteractions={false} deletable={true} onDelete={() => deletePost(activePost.PostID)} onClose={closePostModal} />}
       </div>
       <Footer />
     </div>
